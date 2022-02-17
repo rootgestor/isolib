@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
 // eslint-disable-next-line import/no-import-module-exports
-import Button from './src/components/Button';
+import Breadcrumb from './src/components/molecules/Breadcrumb';
 
-export { Button };
+export { Breadcrumb };
