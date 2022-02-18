@@ -1,0 +1,44 @@
+@import 'antd/lib/style/default.less';
+@import 'antd/lib/table/style/index.less';
+@import 'antd/lib/pagination/style/index.less';
+@import 'antd/lib/select/style/index.less';
+@import 'antd/lib/tooltip/style/index.less';
+@import 'antd/lib/checkbox/style/index.less';
+
+.isolib-table {
+  background-color: rgba(242, 245, 245, 0.8);
+  cursor: pointer;
+
+  &--unread {
+    color: #000;
+    background-color: #fff;
+    font-weight: 600;
+  }
+
+  & &-icon--selected,
+  & &-icon--no-selected {
+    font-size: 18px;
+    background: transparent;
+  }
+
+  & &-icon--selected {
+    color: #e5c06a;
+  }
+
+  & &-icon--no-selected {
+    color: #d7d7d7;
+  }
+
+  & &--hover {
+    box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0,
+      0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+    z-index: 2;
+    position: relative;
+  }
+
+  .ant-table-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
