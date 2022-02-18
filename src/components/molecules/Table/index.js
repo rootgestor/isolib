@@ -13,7 +13,7 @@ function Table({
   loading,
   onRowClick,
   showImportantIcon,
-  showPagination,
+  hidePagination,
   ...rest
 }) {
   const [hover, setHover] = useState(null);
@@ -35,13 +35,14 @@ function Table({
   return (
     <div className="isolib-table">
       <DefaultTable
-        {...rest}
         size="small"
+        scroll={{ y: '100%' }}
+        {...rest}
         rowSelection={() => {}}
         columns={[...additionalColumns, ...columns]}
         dataSource={dataSource}
         pagination={
-          showPagination && {
+          !hidePagination && {
             ...paginate,
             showSizeChanger: true,
             position: ['bottomCenter'],
@@ -64,7 +65,7 @@ function Table({
 Table.propTypes = {
   loading: PropTypes.bool,
   showImportantIcon: PropTypes.bool,
-  showPagination: PropTypes.bool,
+  hidePagination: PropTypes.bool,
   columns: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   dataSource: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   paginate: PropTypes.shape({}),
@@ -77,7 +78,7 @@ Table.defaultProps = {
   onChange: () => {},
   onRowClick: () => {},
   showImportantIcon: false,
-  showPagination: true,
+  hidePagination: false,
   loading: true,
 };
 
