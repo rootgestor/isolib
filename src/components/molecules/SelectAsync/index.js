@@ -54,7 +54,7 @@ DebounceSelect.propTypes = {
 
 DebounceSelect.defaultProps = {
   onChange: () => {},
-  value: '',
+  value: null,
 };
 
 export default DebounceSelect;
