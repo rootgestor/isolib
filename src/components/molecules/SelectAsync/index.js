@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import './styles.less';
 
-function DebounceSelect({ fetchOptions, ...props }) {
+function SelectAsync({ fetchOptions, ...props }) {
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(false);
   const fetchRef = useRef(0);
@@ -42,7 +42,7 @@ function DebounceSelect({ fetchOptions, ...props }) {
   );
 }
 
-DebounceSelect.propTypes = {
+SelectAsync.propTypes = {
   fetchOptions: PropTypes.func.isRequired,
   onChange: PropTypes.func,
   value: PropTypes.oneOfType([
@@ -52,9 +52,9 @@ DebounceSelect.propTypes = {
   ]),
 };
 
-DebounceSelect.defaultProps = {
+SelectAsync.defaultProps = {
   onChange: () => {},
-  value: null,
+  value: [],
 };
 
-export default DebounceSelect;
+export default SelectAsync;
