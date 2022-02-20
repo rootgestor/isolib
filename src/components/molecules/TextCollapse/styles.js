@@ -19,6 +19,9 @@ export const TextCollapseInternal = styled.div`
   display: block;
   width: 100%;
   ${(props) => (props.collapsed ? collapsedStyle : '')}
+  > span {
+    margin-right: 10px;
+  }
 `;
 
 export const Button = styled(DefaultButton)`
