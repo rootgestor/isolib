@@ -1,8 +1,9 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { TextCollapseContainer, Button, TextCollapseInternal } from './styles';
 
-function TextCollapse({ children, textSpace, textLess, textMore }) {
+function TextCollapse({ children, textSpace, textLess, textMore, style }) {
   const [collapsed, setCollapsed] = useState(true);
   const [buttonHidden, setButtonHidden] = useState(true);
   const buttonRef = useRef();
@@ -21,9 +22,8 @@ function TextCollapse({ children, textSpace, textLess, textMore }) {
     }
   }, []);
 
-  console.log('renderr');
   return (
-    <TextCollapseContainer>
+    <TextCollapseContainer style={style}>
       <TextCollapseInternal
         ref={internalRef}
         collapsed={collapsed}
@@ -45,10 +45,16 @@ function TextCollapse({ children, textSpace, textLess, textMore }) {
 }
 
 TextCollapse.propTypes = {
-  // text: PropTypes.oneOfType([PropTypes.func, PropTypes.string]).isRequired,
   textMore: PropTypes.string.isRequired,
   textLess: PropTypes.string.isRequired,
   textSpace: PropTypes.number.isRequired,
+  style: PropTypes.shape({}),
+  children: PropTypes.any,
+};
+
+TextCollapse.defaultProps = {
+  style: {},
+  children: null,
 };
 
 export default TextCollapse;
