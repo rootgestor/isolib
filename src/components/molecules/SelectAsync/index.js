@@ -6,17 +6,24 @@ import PropTypes from 'prop-types';
 
 import './styles.less';
 
-function SelectAsync({ fetchOptions, ...props }) {
-  const [options, setOptions] = useState([]);
+function SelectAsync({
+  fetchOptions,
+  defaultOptions,
+  defaultValue,
+  onChange,
+  ...props
+}) {
+  const [value, setValue] = useState(() => defaultValue);
+  const [options, setOptions] = useState(() => defaultOptions);
   const [loading, setLoading] = useState(false);
   const fetchRef = useRef(0);
 
   const debounceFetcher = useMemo(() => {
-    const loadOptions = (value) => {
+    const loadOptions = (val) => {
       fetchRef.current += 1;
       const fetchId = fetchRef.current;
       setLoading(true);
-      fetchOptions(value).then((newOptions) => {
+      fetchOptions(val).then((newOptions) => {
         if (fetchId !== fetchRef.current) {
           return;
         }
@@ -29,6 +36,11 @@ function SelectAsync({ fetchOptions, ...props }) {
     return debounce(loadOptions, 800);
   }, [fetchOptions]);
 
+  const handleOnChange = (val) => {
+    setValue(val);
+    if (onChange) onChange(val);
+  };
+
   return (
     <Select
       labelInValue
@@ -37,24 +49,24 @@ function SelectAsync({ fetchOptions, ...props }) {
       onFocus={debounceFetcher}
       {...props}
       loading={loading}
+      value={value}
+      onChange={handleOnChange}
       options={options}
     />
   );
 }
 
 SelectAsync.propTypes = {
+  defaultOptions: PropTypes.arrayOf(PropTypes.shape({})),
   fetchOptions: PropTypes.func.isRequired,
   onChange: PropTypes.func,
-  value: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  defaultValue: PropTypes.arrayOf([PropTypes.string, PropTypes.number]),
 };
 
 SelectAsync.defaultProps = {
+  defaultOptions: [],
   onChange: () => {},
-  value: [],
+  defaultValue: [],
 };
 
 export default SelectAsync;

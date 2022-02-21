@@ -1,7 +1,7 @@
 export default (hoverID) => (record) => {
   const namespace = 'isolib-table';
   const classnames = [namespace];
-  if (!record.read) {
+  if (record.read === false) {
     classnames.push(`${namespace}--unread`);
   }
 

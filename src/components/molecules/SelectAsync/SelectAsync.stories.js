@@ -60,4 +60,6 @@ Default.args = {
   mode: 'multiple',
   placeholder: 'Select users',
   style: { width: '100%' },
+  defaultValue: ['asdj'],
+  defaultOptions: [{ label: 'sasasdss', value: 'asdj' }],
 };
