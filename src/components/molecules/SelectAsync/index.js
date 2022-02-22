@@ -50,7 +50,6 @@ function SelectAsync({
       {...props}
       loading={loading}
       value={value}
-      defaultValue={defaultValue}
       onChange={handleOnChange}
       options={options}
     />
