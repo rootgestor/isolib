@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { InternalProps } from '../interfaces.d';
+import { InternalProps } from '../interfaces';
 
 export const Internal = ({
   innerRef,

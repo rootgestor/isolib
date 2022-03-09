@@ -1,7 +1,7 @@
 import React, { useState, useRef, useMemo } from 'react';
+import Select from 'antd/lib/select';
 import debounce from 'lodash/debounce';
 
-import Select from 'antd/lib/select';
 import {
   SelectAsyncProps,
   OptionType,

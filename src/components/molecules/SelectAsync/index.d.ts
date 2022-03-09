@@ -1,0 +1,1 @@
+export { SelectAsyncProps } from './interface';

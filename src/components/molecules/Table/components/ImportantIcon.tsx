@@ -1,6 +1,6 @@
 import React from 'react';
 import { BellOutlined, BellFilled } from '@ant-design/icons';
-import { ImportantIconProps } from '../interfaces.d';
+import { ImportantIconProps } from '../interfaces';
 
 function ImportantIcon({ important }: ImportantIconProps) {
   const namespace = 'isolib-table isolib-table-icon';

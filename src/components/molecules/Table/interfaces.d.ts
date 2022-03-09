@@ -1,5 +1,5 @@
 import { TableProps as DefaultTableProps, TableColumnType } from 'antd';
-import { JSONType, PrimaryTypes } from '../../../../types.d';
+import { JSONType, PrimaryTypes } from '../../../../types';
 
 interface TableColumnProps extends TableColumnType<any> {
   render?: (
