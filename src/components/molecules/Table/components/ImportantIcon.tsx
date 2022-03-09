@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { BellOutlined, BellFilled } from '@ant-design/icons';
+import { ImportantIconProps } from '../interfaces.d';
 
-function ImportantIcon({ important }) {
+function ImportantIcon({ important }: ImportantIconProps) {
   const namespace = 'isolib-table isolib-table-icon';
 
   if (important) {
@@ -10,13 +10,5 @@ function ImportantIcon({ important }) {
   }
   return <BellOutlined className={`${namespace}--no-selected`} />;
 }
-
-ImportantIcon.propTypes = {
-  important: PropTypes.bool,
-};
-
-ImportantIcon.defaultProps = {
-  important: false,
-};
 
 export default ImportantIcon;

@@ -2,28 +2,31 @@ import React, { useState, useRef, useMemo } from 'react';
 import debounce from 'lodash/debounce';
 
 import Select from 'antd/lib/select';
-import PropTypes from 'prop-types';
-
+import {
+  SelectAsyncProps,
+  OptionType,
+  SelectFetchOptionsType,
+} from './interface.d';
 import './styles.less';
 
-function SelectAsync({
+export function SelectAsync({
   fetchOptions,
   defaultOptions,
   defaultValue,
   onChange,
   ...props
-}) {
+}: SelectAsyncProps) {
   const [value, setValue] = useState(() => defaultValue);
   const [options, setOptions] = useState(() => defaultOptions);
   const [loading, setLoading] = useState(false);
   const fetchRef = useRef(0);
 
   const debounceFetcher = useMemo(() => {
-    const loadOptions = (val) => {
+    const loadOptions = (val: SelectFetchOptionsType) => {
       fetchRef.current += 1;
       const fetchId = fetchRef.current;
       setLoading(true);
-      fetchOptions(val).then((newOptions) => {
+      fetchOptions(val).then((newOptions: OptionType[]) => {
         if (fetchId !== fetchRef.current) {
           return;
         }
@@ -36,9 +39,9 @@ function SelectAsync({
     return debounce(loadOptions, 800);
   }, [fetchOptions]);
 
-  const handleOnChange = (val) => {
+  const handleOnChange = (val: string, option: OptionType | OptionType[]) => {
     setValue(val);
-    if (onChange) onChange(val);
+    if (onChange) onChange(val, option);
   };
 
   return (
@@ -55,18 +58,3 @@ function SelectAsync({
     />
   );
 }
-
-SelectAsync.propTypes = {
-  defaultOptions: PropTypes.arrayOf(PropTypes.shape({})),
-  fetchOptions: PropTypes.func.isRequired,
-  onChange: PropTypes.func,
-  defaultValue: PropTypes.arrayOf([PropTypes.string, PropTypes.number]),
-};
-
-SelectAsync.defaultProps = {
-  defaultOptions: [],
-  onChange: () => {},
-  defaultValue: [],
-};
-
-export default SelectAsync;

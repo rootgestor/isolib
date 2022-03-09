@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import DefaultTable from 'antd/lib/table';
 import ImportantIcon from './components/ImportantIcon';
 import getRowClassName from './utils/getRowClassName';
-import './styles.less';
+import { TableProps, TableRecord, PrimaryTypes } from './index.d';
 
-function Table({
+import './components/styles.less';
+
+export function Table({
   columns,
   dataSource,
-  paginate,
+  hidePagination = false,
+  loading = true,
   onChange,
-  loading,
   onRowClick,
-  showImportantIcon,
-  hidePagination,
+  pagination,
+  showImportantIcon = false,
   ...rest
-}) {
+}: TableProps) {
   const [hover, setHover] = useState(null);
 
   const additionalColumns = [];
@@ -24,11 +25,13 @@ function Table({
       dataIndex: 'important',
       key: 'important',
       width: 40,
-      render: (_i, res) => <ImportantIcon {...res} />,
+      render: (_i: PrimaryTypes, res: TableRecord) => (
+        <ImportantIcon {...res} />
+      ),
     });
   }
 
-  const handleRowClick = (record) => () => {
+  const handleRowClick = (record: TableRecord) => () => {
     if (onRowClick) onRowClick(record);
   };
 
@@ -38,12 +41,13 @@ function Table({
         size="small"
         scroll={{ y: '100%' }}
         {...rest}
-        rowSelection={() => {}}
+        // rowSelection={() => {}}
         columns={[...additionalColumns, ...columns]}
         dataSource={dataSource}
         pagination={
-          !hidePagination && {
-            ...paginate,
+          !hidePagination &&
+          pagination && {
+            ...pagination,
             showSizeChanger: true,
             position: ['bottomCenter'],
           }
@@ -61,25 +65,3 @@ function Table({
     </div>
   );
 }
-
-Table.propTypes = {
-  loading: PropTypes.bool,
-  showImportantIcon: PropTypes.bool,
-  hidePagination: PropTypes.bool,
-  columns: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  dataSource: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  paginate: PropTypes.shape({}),
-  onChange: PropTypes.func,
-  onRowClick: PropTypes.func,
-};
-
-Table.defaultProps = {
-  paginate: false,
-  onChange: () => {},
-  onRowClick: () => {},
-  showImportantIcon: false,
-  hidePagination: false,
-  loading: true,
-};
-
-export default Table;

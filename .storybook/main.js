@@ -1,5 +1,5 @@
 module.exports = {
-  stories: ['../src/components/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../src/stories/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     {
       name: 'storybook-preset-less',

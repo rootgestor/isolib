@@ -13,21 +13,24 @@ const dynamicEntries = fs
   .readdirSync(componentsPath)
   .reduce((initial, item) => {
     const groupPath = path.join(componentsPath, `./${item}`);
-    const result = fs.readdirSync(groupPath).reduce(
-      (groups, component) => ({
+    const result = fs.readdirSync(groupPath).reduce((groups, component) => {
+      if (component[0] === '_') return groups;
+      return {
         ...groups,
-        [component]: `${groupPath}/${component}/index.js`,
-      }),
-      {}
-    );
+        [component]: `${groupPath}/${component}/index.tsx`,
+      };
+    }, {});
     return { ...initial, ...result };
   }, {});
 
 module.exports = {
   mode: 'production',
   entry: {
-    All: './index.js',
+    All: './index.tsx',
     ...dynamicEntries,
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   module: {
     rules: [
@@ -38,6 +41,11 @@ module.exports = {
             loader: 'url-loader',
           },
         ],
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: '/node_modules/',
       },
       {
         test: /\.(js|jsx)$/,

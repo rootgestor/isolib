@@ -1,17 +1,19 @@
 /* eslint-disable no-alert */
 /* eslint-disable quotes */
 import React from 'react';
-
-import Table from './index';
+import { Table } from '../components/molecules/Table';
+import {
+  TableProps,
+  TableRecord,
+  TablePaginationConfig,
+  SorterResult,
+  PrimaryTypes,
+} from '../../index.d';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Molecules/Table',
   component: Table,
-  // // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  // argTypes: {
-  //   backgroundColor: { control: 'color' },
-  // },
 };
 
 const columns = [
@@ -26,9 +28,9 @@ const columns = [
     title: 'Asunto',
     dataIndex: 'subject',
     key: 'subject',
-    render: (_s, record) => (
+    render: (subject: PrimaryTypes, record: TableRecord) => (
       <span>
-        {record.subject}
+        {subject}
         <span style={{ fontWeight: 200 }}>
           {' - '}
           {record.text}
@@ -62,7 +64,7 @@ for (let i = 1; i <= 31; i += 1) {
 }
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-function Template(args) {
+function Template(args: TableProps) {
   return <Table {...args} />;
 }
 
@@ -71,12 +73,16 @@ export const Default = Template.bind({});
 Default.args = {
   columns,
   dataSource,
-  onChange: (page, _filter, sorter) =>
+  onChange: (
+    page: TablePaginationConfig,
+    _filter: TableRecord,
+    sorter: SorterResult<any>
+  ) =>
     alert(`
     current:${page.current}
     pageSize: ${page.pageSize}
     column: ${sorter.columnKey}
     order: ${sorter.order}
     `),
-  onRowClick: (res) => alert(`click id: ${res._id}`),
+  onRowClick: (record: TableRecord) => alert(`click id: ${record._id}`),
 };

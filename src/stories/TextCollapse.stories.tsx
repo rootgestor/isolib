@@ -2,22 +2,19 @@
 /* eslint-disable quotes */
 import React from 'react';
 
-import TextCollapse from './index';
+import { TextCollapse } from '../components/molecules/TextCollapse';
+import { TextCollapseProps } from '../components/molecules/TextCollapse/interfaces.d';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Molecules/TextCollapse',
   component: TextCollapse,
-  // // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  // argTypes: {
-  //   backgroundColor: { control: 'color' },
-  // },
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 
 export function Text() {
-  const args = {
+  const args: TextCollapseProps = {
     textSpace: 30,
     textMore: 'más',
     textLess: 'menos',

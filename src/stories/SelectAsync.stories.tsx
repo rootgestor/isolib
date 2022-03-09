@@ -1,22 +1,27 @@
 import React from 'react';
 
-import SelectAsync from './index';
+import { SelectAsync } from '../components/molecules/SelectAsync';
+import { JSONType } from '../../types.d';
+import {
+  OptionType,
+  SelectAsyncProps,
+} from '../components/molecules/SelectAsync/interface.d';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Molecules/SelectAsync',
   component: SelectAsync,
-  // // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  // argTypes: {
-  //   backgroundColor: { control: 'color' },
-  // },
 };
+
+interface fakeCallDataProps {
+  data?: OptionType[];
+}
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 
-function fakeCallData(responseTime) {
+function fakeCallData(responseTime: number) {
   return new Promise((resolve) => {
-    const data = [];
+    const data: JSONType[] = [];
 
     for (let i = 1; i <= 31; i += 1) {
       data.push({
@@ -33,15 +38,15 @@ function fakeCallData(responseTime) {
   });
 }
 
-async function fetchUserList() {
-  const { data } = await fakeCallData(2000);
+async function fetchUserList(text: string) {
+  const { data }: fakeCallDataProps = await fakeCallData(2000);
   return data.map((employee) => ({
     label: `${employee.fullname} (${employee.id})`,
     value: employee.id,
   }));
 }
 
-function Template(args) {
+function Template(args: SelectAsyncProps) {
   const [value, setValue] = React.useState([]);
 
   return (
