@@ -1,5 +1,5 @@
 import React from 'react';
-import { ContainerProps } from '../interfaces';
+import { ContainerProps } from '../index.d';
 
 export const Container = ({ children, style = {} }: ContainerProps) => {
   return (

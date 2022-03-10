@@ -1,6 +1,6 @@
 import React from 'react';
 import DefaultButton from 'antd/lib/button';
-import { ButtonProps } from '../interfaces';
+import { ButtonProps } from '../index.d';
 
 export const Button = ({
   children,

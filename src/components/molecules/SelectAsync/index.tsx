@@ -6,7 +6,7 @@ import {
   SelectAsyncProps,
   OptionType,
   SelectFetchOptionsType,
-} from './interface.d';
+} from './index.d';
 
 export function SelectAsync({
   fetchOptions,

@@ -1,3 +1,3 @@
 /// <reference types="react" />
-import { SelectAsyncProps } from './interface.d';
+import { SelectAsyncProps } from './index.d';
 export declare function SelectAsync({ fetchOptions, defaultOptions, defaultValue, onChange, ...props }: SelectAsyncProps): JSX.Element;

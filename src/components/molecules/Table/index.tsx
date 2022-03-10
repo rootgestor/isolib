@@ -52,7 +52,7 @@ export function Table({
         }
         onChange={onChange}
         loading={loading}
-        rowKey={(record: { [key: string]: PrimaryTypes }) => record._id}
+        rowKey={(record: { [key: string]: any }) => record._id}
         rowClassName={getRowClassName(hover)}
         onRow={(record) => ({
           onClick: handleRowClick(record),

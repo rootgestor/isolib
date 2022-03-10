@@ -1,7 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React, { useState, useRef, useEffect } from 'react';
 import { Container, Button, Internal } from './components';
-import { TextCollapseProps } from './interfaces';
+import { TextCollapseProps } from './index.d';
 
 export function TextCollapse({
   children,
