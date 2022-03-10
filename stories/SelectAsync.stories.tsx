@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { SelectAsync } from '../components/molecules/SelectAsync';
-import { JSONType } from '../../types.d';
+import { SelectAsync } from '../src/components/molecules/SelectAsync';
+import { JSONType } from '../src/types.d';
 import {
   OptionType,
   SelectAsyncProps,
-} from '../components/molecules/SelectAsync/interface.d';
+} from '../src/components/molecules/SelectAsync/interface.d';
+import '../src/components/molecules/SelectAsync/styles.less';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

@@ -1,7 +1,6 @@
 import React from 'react';
 import DefaultBreadcrumb from 'antd/lib/breadcrumb';
 import { BreadcrumbProps } from './index.d';
-import './styles.less';
 
 export const Breadcrumb = ({ breadcrumbNameMap, onClick }: BreadcrumbProps) => {
   const urlList: string[] = Object.keys(breadcrumbNameMap);

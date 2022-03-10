@@ -1,6 +1,6 @@
 import { TableRecord } from '../index.d';
 
-export default (hoverID: string) =>
+export default (hoverID: any) =>
   (record: TableRecord): string => {
     const namespace = 'isolib-table';
     const classnames = [namespace];

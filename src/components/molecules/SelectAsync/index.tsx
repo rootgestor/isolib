@@ -7,7 +7,6 @@ import {
   OptionType,
   SelectFetchOptionsType,
 } from './interface.d';
-import './styles.less';
 
 export function SelectAsync({
   fetchOptions,

@@ -2,20 +2,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Container, Button, Internal } from './components';
 import { TextCollapseProps } from './interfaces';
-import './components/styles.less';
 
 export function TextCollapse({
   children,
   textSpace,
   textLess,
   textMore,
-  style,
+  style = {},
 }: TextCollapseProps) {
   const [collapsed, setCollapsed] = useState(true);
   const [buttonHidden, setButtonHidden] = useState(true);
-  const buttonRef = useRef<HTMLButtonElement>();
-  const internalRef = useRef<HTMLDivElement>();
-  const textRef = useRef<HTMLElement>();
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const internalRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLSpanElement>(null);
 
   const handleClick = () => {
     setCollapsed(!collapsed);

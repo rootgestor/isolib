@@ -8,5 +8,5 @@ export type SelectFetchOptionsType =
 
 export interface SelectAsyncProps extends SelectProps {
   defaultOptions?: DefaultOptionType[];
-  fetchOptions?: (data: SelectFetchOptionsType) => Promise<DefaultOptionType[]>;
+  fetchOptions: (data: SelectFetchOptionsType) => Promise<DefaultOptionType[]>;
 }

@@ -1,5 +1,5 @@
 module.exports = {
-  stories: ['../src/stories/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../stories/**/*.stories.@(ts|tsx|js|jsx)'],
   addons: [
     {
       name: 'storybook-preset-less',
@@ -11,9 +11,12 @@ module.exports = {
         },
       },
     },
-    '@storybook/addon-links',
+    '@storybook/addon-links', 
     '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
+    '@storybook/addon-postcss'
   ],
-  framework: '@storybook/react',
+  // https://storybook.js.org/docs/react/configure/typescript#mainjs-configuration
+  typescript: {
+    check: true, // type-check stories during Storybook build
+  }
 };
