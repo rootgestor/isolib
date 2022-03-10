@@ -3,8 +3,8 @@
 import React from 'react';
 
 import { TextCollapse } from '../src/components/molecules/TextCollapse';
-import { TextCollapseProps } from '../src/components/molecules/TextCollapse/interfaces.d';
-import '../src/components/molecules/TextCollapse/styles.less';
+import { TextCollapseProps } from '../src/components/molecules/TextCollapse/index.d';
+import '../src/styles/TextCollapse.less';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

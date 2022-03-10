@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectAsync render snapshot 1`] = `
+<ForwardRef(InternalSelect)
+  filterOption={false}
+  labelInValue={true}
+  loading={false}
+  mode="multiple"
+  onChange={[Function]}
+  onFocus={[Function]}
+  onSearch={[Function]}
+  options={
+    Array [
+      Object {
+        "label": "sasasdss",
+        "value": "asdj",
+      },
+    ]
+  }
+  placeholder="Select users"
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+  value={
+    Array [
+      "asdj",
+    ]
+  }
+/>
+`;

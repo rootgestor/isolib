@@ -2,14 +2,14 @@
 /* eslint-disable quotes */
 import React from 'react';
 import { Table } from '../src/components/molecules/Table';
-import '../src/components/molecules/Table/styles.less';
+import '../src/styles/Table.less';
 import {
   TableProps,
   TableRecord,
   TablePaginationConfig,
   SorterResult,
   PrimaryTypes,
-} from '../src/index.d';
+} from '../src/components/molecules/Table/index.d';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -34,7 +34,7 @@ const columns = [
         {subject}
         <span style={{ fontWeight: 200 }}>
           {' - '}
-          {record.text}
+          {record.message}
         </span>
       </span>
     ),

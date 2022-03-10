@@ -278,7 +278,6 @@ var Internal = function Internal(_ref) {
   }, children);
 };
 
-/* eslint-disable react/forbid-prop-types */
 function TextCollapse(_ref) {
   var children = _ref.children,
       textSpace = _ref.textSpace,
@@ -307,9 +306,10 @@ function TextCollapse(_ref) {
     if (internalRef.current && textRef.current) {
       var textWidth = textRef.current.offsetWidth;
       var innerWidth = internalRef.current.offsetWidth;
-      setButtonHidden(textWidth + textSpace < innerWidth);
+      var bHidden = !!(textWidth + textSpace < innerWidth);
+      setButtonHidden(bHidden);
     }
-  }, []);
+  }, [textSpace]);
   return React.createElement(Container, {
     style: style
   }, React.createElement(Internal, {

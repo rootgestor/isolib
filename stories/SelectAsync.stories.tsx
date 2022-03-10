@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { SelectAsync } from '../src/components/molecules/SelectAsync';
-import { JSONType } from '../src/types.d';
+import { JSONType } from '../src/types';
 import {
   OptionType,
   SelectAsyncProps,
-} from '../src/components/molecules/SelectAsync/interface.d';
-import '../src/components/molecules/SelectAsync/styles.less';
+} from '../src/components/molecules/SelectAsync/index.d';
+import '../src/styles/SelectAsync.less';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -39,7 +39,7 @@ function fakeCallData(responseTime: number) {
   });
 }
 
-async function fetchUserList(text: string) {
+async function fetchUserList() {
   const { data }: fakeCallDataProps = await fakeCallData(2000);
   return data.map((employee) => ({
     label: `${employee.fullname} (${employee.id})`,

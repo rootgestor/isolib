@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumb render snapshot 1`] = `
+<Breadcrumb
+  style={
+    Object {
+      "margin": "16px 0",
+    }
+  }
+>
+  <BreadcrumbItem
+    href="#"
+    onClick={[Function]}
+  >
+    Usuarios
+  </BreadcrumbItem>
+  <BreadcrumbItem
+    href="#"
+    onClick={[Function]}
+  >
+    Usuario &gt; Detalle
+  </BreadcrumbItem>
+</Breadcrumb>
+`;

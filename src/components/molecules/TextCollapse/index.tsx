@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
 import React, { useState, useRef, useEffect } from 'react';
 import { Container, Button, Internal } from './components';
 import { TextCollapseProps } from './index.d';
@@ -24,9 +23,10 @@ export function TextCollapse({
     if (internalRef.current && textRef.current) {
       const textWidth = textRef.current.offsetWidth;
       const innerWidth = internalRef.current.offsetWidth;
-      setButtonHidden(textWidth + textSpace < innerWidth);
+      const bHidden = !!(textWidth + textSpace < innerWidth);
+      setButtonHidden(bHidden);
     }
-  }, []);
+  }, [textSpace]);
 
   return (
     <Container style={style}>

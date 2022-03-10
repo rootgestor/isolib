@@ -8,7 +8,7 @@
     "src"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=16"
   },
   "scripts": {
     "start": "tsdx watch",
@@ -23,8 +23,8 @@
   },
   "peerDependencies": {
     "antd": ">=4",
-    "react": ">=16",
-    "lodash-es": ">=4"
+    "lodash-es": ">=4",
+    "react": ">=16"
   },
   "husky": {
     "hooks": {
@@ -58,7 +58,11 @@
     "@storybook/addon-links": "^6.4.19",
     "@storybook/addon-postcss": "^2.0.0",
     "@storybook/addons": "^6.4.19",
+    "@storybook/builder-webpack5": "^6.4.19",
+    "@storybook/manager-webpack5": "^6.4.19",
     "@storybook/react": "^6.4.19",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.4",
     "@types/lodash": "^4.14.179",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.13",
@@ -77,6 +81,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
+    "react-test-renderer": "^17.0.2",
     "rollup-plugin-postcss": "^4.0.2",
     "size-limit": "^7.0.8",
     "storybook-preset-less": "^1.1.2",
