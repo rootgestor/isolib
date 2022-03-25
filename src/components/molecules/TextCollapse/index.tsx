@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Container, Button, Internal } from './components';
-import { TextCollapseProps } from './index.d';
+import type { TextCollapseProps } from './typings';
 
-export function TextCollapse({
+function TextCollapse({
   children,
   textSpace,
   textLess,
@@ -44,3 +44,5 @@ export function TextCollapse({
     </Container>
   );
 }
+
+export default TextCollapse;

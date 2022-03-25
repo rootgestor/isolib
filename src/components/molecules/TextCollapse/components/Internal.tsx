@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { InternalProps } from '../index.d';
+import type { InternalProps } from '../typings';
 
 export const Internal = ({
   innerRef,

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import DefaultTable from 'antd/lib/table';
 import ImportantIcon from './components/ImportantIcon';
 import getRowClassName from './utils/getRowClassName';
-import { TableProps, TableRecord, PrimaryTypes } from './index.d';
+import { TableProps, TableRecord, PrimaryTypes } from '../../..';
 
-export function Table({
+function Table({
   columns,
   dataSource,
   hidePagination = false,
@@ -63,3 +63,5 @@ export function Table({
     </div>
   );
 }
+
+export default Table;

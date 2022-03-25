@@ -74,6 +74,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 }
 
 var _excluded = ["fetchOptions", "defaultOptions", "defaultValue", "onChange"];
+
 function SelectAsync(_ref) {
   var fetchOptions = _ref.fetchOptions,
       defaultOptions = _ref.defaultOptions,
@@ -167,6 +168,7 @@ var getRowClassName = (function (hoverID) {
 });
 
 var _excluded$1 = ["columns", "dataSource", "hidePagination", "loading", "onChange", "onRowClick", "pagination", "showImportantIcon"];
+
 function Table(_ref) {
   var columns = _ref.columns,
       dataSource = _ref.dataSource,

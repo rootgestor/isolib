@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Breadcrumb } from '../src/components/molecules/Breadcrumb';
-import { BreadcrumbProps } from '../src/components/molecules/Breadcrumb/index.d';
+import Breadcrumb from '../src/components/molecules/Breadcrumb';
+import type { BreadcrumbProps } from '../src';
 import '../src/styles/Breadcrumb.less';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export

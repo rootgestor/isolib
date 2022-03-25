@@ -1,3 +1,3 @@
 /// <reference types="react" />
-import { InternalProps } from '../index.d';
+import type { InternalProps } from '../typings';
 export declare const Internal: ({ innerRef, collapsed, space, children, }: InternalProps) => JSX.Element;

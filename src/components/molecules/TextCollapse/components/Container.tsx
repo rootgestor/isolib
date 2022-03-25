@@ -1,5 +1,5 @@
 import React from 'react';
-import { ContainerProps } from '../index.d';
+import type { ContainerProps } from '../typings';
 
 export const Container = ({ children, style = {} }: ContainerProps) => {
   return (

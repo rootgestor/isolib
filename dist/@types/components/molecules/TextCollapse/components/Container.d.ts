@@ -1,3 +1,3 @@
 /// <reference types="react" />
-import { ContainerProps } from '../index.d';
+import type { ContainerProps } from '../typings';
 export declare const Container: ({ children, style }: ContainerProps) => JSX.Element;

@@ -6,9 +6,9 @@ import {
   SelectAsyncProps,
   OptionType,
   SelectFetchOptionsType,
-} from './index.d';
+} from './typings';
 
-export function SelectAsync({
+function SelectAsync({
   fetchOptions,
   defaultOptions,
   defaultValue,
@@ -57,3 +57,5 @@ export function SelectAsync({
     />
   );
 }
+
+export default SelectAsync;

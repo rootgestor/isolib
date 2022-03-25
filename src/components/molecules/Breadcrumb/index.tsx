@@ -1,8 +1,8 @@
 import React from 'react';
 import DefaultBreadcrumb from 'antd/lib/breadcrumb';
-import { BreadcrumbProps } from './index.d';
+import type { BreadcrumbProps } from './typings';
 
-export const Breadcrumb = ({ breadcrumbNameMap, onClick }: BreadcrumbProps) => {
+const Breadcrumb = ({ breadcrumbNameMap, onClick }: BreadcrumbProps) => {
   const urlList: string[] = Object.keys(breadcrumbNameMap);
 
   const handleClick =
@@ -23,3 +23,5 @@ export const Breadcrumb = ({ breadcrumbNameMap, onClick }: BreadcrumbProps) => {
     </DefaultBreadcrumb>
   );
 };
+
+export default Breadcrumb;

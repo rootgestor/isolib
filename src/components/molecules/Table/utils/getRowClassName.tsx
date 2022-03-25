@@ -1,4 +1,4 @@
-import { TableRecord } from '../index.d';
+import { TableRecord } from '../typings';
 
 export default (hoverID: any) =>
   (record: TableRecord): string => {
