@@ -1,9 +1,10 @@
 /// <reference types="react" />
 import { TableProps as DefaultTableProps, TableColumnType } from 'antd';
+import { FilterValue, SorterResult as DefaultSorterResult } from 'antd/lib/table/interface';
 import { PrimaryTypes } from '../../../typings';
 export { TablePaginationConfig, TableColumnType } from 'antd';
-export { SorterResult } from 'antd/lib/table/interface';
-interface TableColumnProps extends TableColumnType<any> {
+export { FilterValue } from 'antd/lib/table/interface';
+export interface TableColumnProps extends TableColumnType<any> {
     render?: (value: PrimaryTypes, record: TableRecord) => JSX.Element | PrimaryTypes;
 }
 export interface TableProps extends DefaultTableProps<any> {
@@ -15,8 +16,9 @@ export interface TableProps extends DefaultTableProps<any> {
 export interface ImportantIconProps {
     important?: boolean;
 }
-export interface TableRecord extends ImportantIconProps {
+export interface TableRecord extends ImportantIconProps, Partial<Record<string, PrimaryTypes | FilterValue | null>> {
     _id?: string;
     read?: boolean;
-    [key: string]: PrimaryTypes | undefined;
+}
+export interface SorterResult extends DefaultSorterResult<any> {
 }

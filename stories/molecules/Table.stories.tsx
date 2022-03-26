@@ -1,15 +1,15 @@
 /* eslint-disable no-alert */
 /* eslint-disable quotes */
 import React from 'react';
-import Table from '../src/components/molecules/Table';
-import '../src/styles/Table.less';
+import Table from '../../src/components/molecules/Table';
+import '../../src/styles/Table.less';
 import type {
   TableProps,
   TableRecord,
   TablePaginationConfig,
   SorterResult,
   PrimaryTypes,
-} from '../src';
+} from '../../src';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
