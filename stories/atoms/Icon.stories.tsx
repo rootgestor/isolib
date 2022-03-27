@@ -3,7 +3,14 @@
 import React from 'react';
 import * as Icon from '../../src/components/atoms/Icon';
 
-const IconList = Object.keys(Icon).filter((i) => i !== 'Custom');
+const ignore = [
+  'CustomIcon',
+  'createFromIconfontCN',
+  'getTwoToneColor',
+  'setTwoToneColor',
+];
+
+const IconList = Object.keys(Icon).filter((i) => !ignore.includes(i));
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -31,7 +38,7 @@ function DefaultTemplate(args) {
 }
 
 function CustomIconTemplate(args) {
-  return <Icon.Custom src={args.iconUrl} />;
+  return <Icon.CustomIcon src={args.iconUrl} />;
 }
 
 export const Default = DefaultTemplate.bind({});
@@ -39,7 +46,7 @@ Default.args = {
   icon: IconList[0],
   rotate: 0,
   spin: false,
-  fontSize: 20,
+  fontSize: 100,
   color: 'red',
 };
 
