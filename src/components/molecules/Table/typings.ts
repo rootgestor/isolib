@@ -29,6 +29,8 @@ export interface TableRecord
   extends ImportantIconProps,
     Partial<Record<string, PrimaryTypes | FilterValue | null>> {
   _id?: string;
+  subject?: string;
+  text?: string;
   read?: boolean;
 }
 

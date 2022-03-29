@@ -44,16 +44,7 @@ async function fetchUserList() {
 }
 
 function Template(args: SelectAsyncProps) {
-  const [value, setValue] = React.useState([]);
-
-  return (
-    <SelectAsync
-      {...args}
-      value={value}
-      onChange={(newValue) => setValue(newValue)}
-      fetchOptions={fetchUserList}
-    />
-  );
+  return <SelectAsync {...args} fetchOptions={fetchUserList} />;
 }
 
 export const Default = Template.bind({});
