@@ -11,7 +11,7 @@ export interface TableProps extends DefaultTableProps<any> {
     columns: TableColumnProps[];
     hidePagination?: boolean;
     onRowClick?: (record: TableRecord) => void;
-    showImportantIcon?: boolean;
+    isMessage?: boolean;
 }
 export interface ImportantIconProps {
     important?: boolean;

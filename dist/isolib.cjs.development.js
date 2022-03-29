@@ -137,7 +137,7 @@ function SelectAsync(_ref) {
 
 function ImportantIcon(_ref) {
   var important = _ref.important;
-  var namespace = 'isolib-table isolib-table-icon';
+  var namespace = 'isolib-table-msg isolib-table-msg-icon';
 
   if (important) {
     return React__default.createElement(icons.BellFilled, {
@@ -152,7 +152,7 @@ function ImportantIcon(_ref) {
 
 var getRowClassName = (function (hoverID) {
   return function (record) {
-    var namespace = 'isolib-table';
+    var namespace = 'isolib-table-msg';
     var classnames = [namespace];
 
     if (record.read === false) {
@@ -167,7 +167,7 @@ var getRowClassName = (function (hoverID) {
   };
 });
 
-var _excluded$1 = ["columns", "dataSource", "hidePagination", "loading", "onChange", "onRowClick", "pagination", "showImportantIcon"];
+var _excluded$1 = ["columns", "dataSource", "hidePagination", "loading", "onChange", "onRowClick", "pagination", "isMessage"];
 
 function Table(_ref) {
   var columns = _ref.columns,
@@ -179,8 +179,8 @@ function Table(_ref) {
       onChange = _ref.onChange,
       onRowClick = _ref.onRowClick,
       pagination = _ref.pagination,
-      _ref$showImportantIco = _ref.showImportantIcon,
-      showImportantIcon = _ref$showImportantIco === void 0 ? false : _ref$showImportantIco,
+      _ref$isMessage = _ref.isMessage,
+      isMessage = _ref$isMessage === void 0 ? false : _ref$isMessage,
       rest = _objectWithoutPropertiesLoose(_ref, _excluded$1);
 
   var _useState = React.useState(''),
@@ -189,7 +189,7 @@ function Table(_ref) {
 
   var additionalColumns = [];
 
-  if (showImportantIcon) {
+  if (isMessage) {
     additionalColumns.push({
       dataIndex: 'important',
       key: 'important',
@@ -207,9 +207,9 @@ function Table(_ref) {
   };
 
   return React__default.createElement("div", {
-    className: "isolib-table"
+    className: "" + (isMessage ? 'isolib-table-msg' : '')
   }, React__default.createElement(DefaultTable, Object.assign({
-    size: "small",
+    size: "middle",
     scroll: {
       y: '100%'
     }
@@ -228,7 +228,7 @@ function Table(_ref) {
     rowKey: function rowKey(record) {
       return record._id;
     },
-    rowClassName: getRowClassName(hover),
+    rowClassName: isMessage ? getRowClassName(hover) : '',
     onRow: function onRow(record) {
       return {
         onClick: handleRowClick(record),

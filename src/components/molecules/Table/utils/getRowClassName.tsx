@@ -2,7 +2,7 @@ import { TableRecord } from '../typings';
 
 export default (hoverID: any) =>
   (record: TableRecord): string => {
-    const namespace = 'isolib-table';
+    const namespace = 'isolib-table-msg';
     const classnames = [namespace];
     if (record.read === false) {
       classnames.push(`${namespace}--unread`);

@@ -3,7 +3,7 @@ import { BellOutlined, BellFilled } from '@ant-design/icons';
 import { ImportantIconProps } from '../typings';
 
 function ImportantIcon({ important }: ImportantIconProps) {
-  const namespace = 'isolib-table isolib-table-icon';
+  const namespace = 'isolib-table-msg isolib-table-msg-icon';
 
   if (important) {
     return <BellFilled className={`${namespace}--selected`} />;

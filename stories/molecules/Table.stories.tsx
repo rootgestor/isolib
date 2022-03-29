@@ -70,14 +70,13 @@ function Template(args: TableProps) {
 }
 
 export const Default = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
 Default.args = {
   columns,
   dataSource,
   onChange: (
     page: TablePaginationConfig,
     _filter: TableRecord,
-    sorter: SorterResult<any>
+    sorter: SorterResult
   ) =>
     alert(`
     current:${page.current}
@@ -86,4 +85,10 @@ Default.args = {
     order: ${sorter.order}
     `),
   onRowClick: (record: TableRecord) => alert(`click id: ${record._id}`),
+};
+
+export const Message = Template.bind({});
+Message.args = {
+  ...Default.args,
+  isMessage: true,
 };

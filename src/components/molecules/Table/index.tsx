@@ -12,14 +12,14 @@ function Table({
   onChange,
   onRowClick,
   pagination,
-  showImportantIcon = false,
+  isMessage = false,
   ...rest
 }: TableProps) {
   const [hover, setHover] =
     useState<React.SetStateAction<string | undefined>>('');
 
   const additionalColumns = [];
-  if (showImportantIcon) {
+  if (isMessage) {
     additionalColumns.push({
       dataIndex: 'important',
       key: 'important',
@@ -35,9 +35,9 @@ function Table({
   };
 
   return (
-    <div className="isolib-table">
+    <div className={`isolib-table ${isMessage ? 'isolib-table-msg' : ''}`}>
       <DefaultTable
-        size="small"
+        size="middle"
         scroll={{ y: '100%' }}
         {...rest}
         rowSelection={{ type: 'checkbox' }}
@@ -53,7 +53,7 @@ function Table({
         onChange={onChange}
         loading={loading}
         rowKey={(record: { [key: string]: any }) => record._id}
-        rowClassName={getRowClassName(hover)}
+        rowClassName={isMessage ? getRowClassName(hover) : ''}
         onRow={(record) => ({
           onClick: handleRowClick(record),
           onMouseEnter: () => setHover(record._id),
