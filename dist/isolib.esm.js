@@ -1,58 +1,12 @@
-import * as icons from '@ant-design/icons';
-import { BellFilled, BellOutlined } from '@ant-design/icons';
 import React, { useState, useRef, useMemo, useEffect } from 'react';
+import * as Icons from '@ant-design/icons';
+import { BellFilled, BellOutlined } from '@ant-design/icons';
 import DefaultBreadcrumb from 'antd/lib/breadcrumb';
 import Select from 'antd/lib/select';
 import debounce from 'lodash-es/debounce';
 import DefaultTable from 'antd/lib/table';
 import DefaultButton from 'antd/lib/button';
 import classNames from 'classnames';
-
-function Custom(_ref) {
-  var src = _ref.src;
-  return React.createElement("img", {
-    style: {
-      width: '25px',
-      height: '25px',
-      padding: '5px'
-    },
-    src: src
-  });
-}
-
-
-
-var index = {
-  __proto__: null,
-  Icons: icons,
-  CustomIcon: Custom
-};
-
-var Breadcrumb = function Breadcrumb(_ref) {
-  var breadcrumbNameMap = _ref.breadcrumbNameMap,
-      onClick = _ref.onClick;
-  var urlList = Object.keys(breadcrumbNameMap);
-
-  var handleClick = function handleClick(url) {
-    return function (event) {
-      event.preventDefault();
-      onClick(url);
-      return false;
-    };
-  };
-
-  return React.createElement(DefaultBreadcrumb, {
-    style: {
-      margin: '16px 0'
-    }
-  }, urlList.map(function (url) {
-    return React.createElement(DefaultBreadcrumb.Item, {
-      key: url,
-      href: "#",
-      onClick: handleClick(url)
-    }, breadcrumbNameMap[url]);
-  }));
-};
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -87,14 +41,63 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   return target;
 }
 
-var _excluded = ["fetchOptions", "defaultOptions", "defaultValue", "onChange"];
+var _excluded = ["src"];
+
+function Icon(_ref) {
+  var src = _ref.src,
+      args = _objectWithoutPropertiesLoose(_ref, _excluded);
+
+  var key = src;
+  var Icon = Icons[key];
+
+  if (Icon) {
+    return React.createElement(Icon, Object.assign({}, args));
+  }
+
+  return React.createElement("img", {
+    style: {
+      width: '25px',
+      height: '25px',
+      padding: '5px'
+    },
+    src: src
+  });
+}
+
+var Breadcrumb = function Breadcrumb(_ref) {
+  var breadcrumbNameMap = _ref.breadcrumbNameMap,
+      onClick = _ref.onClick;
+  var urlList = Object.keys(breadcrumbNameMap);
+
+  var handleClick = function handleClick(url) {
+    return function (event) {
+      event.preventDefault();
+      onClick(url);
+      return false;
+    };
+  };
+
+  return React.createElement(DefaultBreadcrumb, {
+    style: {
+      margin: '16px 0'
+    }
+  }, urlList.map(function (url) {
+    return React.createElement(DefaultBreadcrumb.Item, {
+      key: url,
+      href: "#",
+      onClick: handleClick(url)
+    }, breadcrumbNameMap[url]);
+  }));
+};
+
+var _excluded$1 = ["fetchOptions", "defaultOptions", "defaultValue", "onChange"];
 
 function SelectAsync(_ref) {
   var fetchOptions = _ref.fetchOptions,
       defaultOptions = _ref.defaultOptions,
       defaultValue = _ref.defaultValue,
       onChange = _ref.onChange,
-      props = _objectWithoutPropertiesLoose(_ref, _excluded);
+      props = _objectWithoutPropertiesLoose(_ref, _excluded$1);
 
   var _useState = useState(function () {
     return defaultValue;
@@ -181,7 +184,7 @@ var getRowClassName = (function (hoverID) {
   };
 });
 
-var _excluded$1 = ["columns", "dataSource", "hidePagination", "loading", "onChange", "onRowClick", "pagination", "isMessage"];
+var _excluded$2 = ["columns", "dataSource", "hidePagination", "loading", "onChange", "onRowClick", "pagination", "isMessage"];
 
 function Table(_ref) {
   var columns = _ref.columns,
@@ -195,7 +198,7 @@ function Table(_ref) {
       pagination = _ref.pagination,
       _ref$isMessage = _ref.isMessage,
       isMessage = _ref$isMessage === void 0 ? false : _ref$isMessage,
-      rest = _objectWithoutPropertiesLoose(_ref, _excluded$1);
+      rest = _objectWithoutPropertiesLoose(_ref, _excluded$2);
 
   var _useState = useState(''),
       hover = _useState[0],
@@ -349,5 +352,5 @@ function TextCollapse(_ref) {
   }, collapsed ? textMore : textLess)));
 }
 
-export { Breadcrumb, index as Icons, SelectAsync, Table, TextCollapse };
+export { Breadcrumb, Icon, SelectAsync, Table, TextCollapse };
 //# sourceMappingURL=isolib.esm.js.map

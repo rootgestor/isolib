@@ -1,5 +1,5 @@
-export * as Icons from './components/atoms/Icon';
 export * from './typings';
+export { default as Icon } from './components/atoms/Icon';
 /** Molecules */
 export * from './components/molecules/Breadcrumb/typings';
 export { default as Breadcrumb } from './components/molecules/Breadcrumb';

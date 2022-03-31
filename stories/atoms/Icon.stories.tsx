@@ -1,16 +1,12 @@
 /* eslint-disable no-alert */
 /* eslint-disable quotes */
 import React from 'react';
-import * as Icon from '../../src/components/atoms/Icon';
+import * as Icons from '@ant-design/icons';
+import Icon from '../../src/components/atoms/Icon';
 
-const ignore = [
-  'CustomIcon',
-  'createFromIconfontCN',
-  'getTwoToneColor',
-  'setTwoToneColor',
-];
+const ignore = ['createFromIconfontCN', 'getTwoToneColor', 'setTwoToneColor'];
 
-const IconList = Object.keys(Icon).filter((i) => !ignore.includes(i));
+const IconList = Object.keys(Icons).filter((i) => !ignore.includes(i));
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -31,14 +27,13 @@ export default {
 };
 
 function DefaultTemplate(args) {
-  const Component = Icon[args.icon];
   const { fontSize, color } = args;
   args.style = { fontSize, color };
-  return Component ? <Component {...args} /> : <div />;
+  return <Icon src={args.icon} {...args} />;
 }
 
 function CustomIconTemplate(args) {
-  return <Icon.CustomIcon src={args.iconUrl} />;
+  return <Icon src={args.iconUrl} />;
 }
 
 export const Default = DefaultTemplate.bind({});

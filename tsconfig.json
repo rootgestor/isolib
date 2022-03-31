@@ -15,8 +15,6 @@
     "lib": ["dom", "es2017"],
     "skipLibCheck": true,
     "outDir": "./dist",
-    "declaration": true,
-    "declarationDir": "dist/@types",
-    "typeRoots": ["dist/@types"]
+    "declaration": true
   }
 }

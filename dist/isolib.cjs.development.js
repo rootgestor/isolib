@@ -4,61 +4,15 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var icons = require('@ant-design/icons');
 var React = require('react');
 var React__default = _interopDefault(React);
+var Icons = require('@ant-design/icons');
 var DefaultBreadcrumb = _interopDefault(require('antd/lib/breadcrumb'));
 var Select = _interopDefault(require('antd/lib/select'));
 var debounce = _interopDefault(require('lodash/debounce'));
 var DefaultTable = _interopDefault(require('antd/lib/table'));
 var DefaultButton = _interopDefault(require('antd/lib/button'));
 var classNames = _interopDefault(require('classnames'));
-
-function Custom(_ref) {
-  var src = _ref.src;
-  return React__default.createElement("img", {
-    style: {
-      width: '25px',
-      height: '25px',
-      padding: '5px'
-    },
-    src: src
-  });
-}
-
-
-
-var index = {
-  __proto__: null,
-  Icons: icons,
-  CustomIcon: Custom
-};
-
-var Breadcrumb = function Breadcrumb(_ref) {
-  var breadcrumbNameMap = _ref.breadcrumbNameMap,
-      onClick = _ref.onClick;
-  var urlList = Object.keys(breadcrumbNameMap);
-
-  var handleClick = function handleClick(url) {
-    return function (event) {
-      event.preventDefault();
-      onClick(url);
-      return false;
-    };
-  };
-
-  return React__default.createElement(DefaultBreadcrumb, {
-    style: {
-      margin: '16px 0'
-    }
-  }, urlList.map(function (url) {
-    return React__default.createElement(DefaultBreadcrumb.Item, {
-      key: url,
-      href: "#",
-      onClick: handleClick(url)
-    }, breadcrumbNameMap[url]);
-  }));
-};
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -93,14 +47,63 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   return target;
 }
 
-var _excluded = ["fetchOptions", "defaultOptions", "defaultValue", "onChange"];
+var _excluded = ["src"];
+
+function Icon(_ref) {
+  var src = _ref.src,
+      args = _objectWithoutPropertiesLoose(_ref, _excluded);
+
+  var key = src;
+  var Icon = Icons[key];
+
+  if (Icon) {
+    return React__default.createElement(Icon, Object.assign({}, args));
+  }
+
+  return React__default.createElement("img", {
+    style: {
+      width: '25px',
+      height: '25px',
+      padding: '5px'
+    },
+    src: src
+  });
+}
+
+var Breadcrumb = function Breadcrumb(_ref) {
+  var breadcrumbNameMap = _ref.breadcrumbNameMap,
+      onClick = _ref.onClick;
+  var urlList = Object.keys(breadcrumbNameMap);
+
+  var handleClick = function handleClick(url) {
+    return function (event) {
+      event.preventDefault();
+      onClick(url);
+      return false;
+    };
+  };
+
+  return React__default.createElement(DefaultBreadcrumb, {
+    style: {
+      margin: '16px 0'
+    }
+  }, urlList.map(function (url) {
+    return React__default.createElement(DefaultBreadcrumb.Item, {
+      key: url,
+      href: "#",
+      onClick: handleClick(url)
+    }, breadcrumbNameMap[url]);
+  }));
+};
+
+var _excluded$1 = ["fetchOptions", "defaultOptions", "defaultValue", "onChange"];
 
 function SelectAsync(_ref) {
   var fetchOptions = _ref.fetchOptions,
       defaultOptions = _ref.defaultOptions,
       defaultValue = _ref.defaultValue,
       onChange = _ref.onChange,
-      props = _objectWithoutPropertiesLoose(_ref, _excluded);
+      props = _objectWithoutPropertiesLoose(_ref, _excluded$1);
 
   var _useState = React.useState(function () {
     return defaultValue;
@@ -160,12 +163,12 @@ function ImportantIcon(_ref) {
   var namespace = 'isolib-table-msg isolib-table-msg-icon';
 
   if (important) {
-    return React__default.createElement(icons.BellFilled, {
+    return React__default.createElement(Icons.BellFilled, {
       className: namespace + "--selected"
     });
   }
 
-  return React__default.createElement(icons.BellOutlined, {
+  return React__default.createElement(Icons.BellOutlined, {
     className: namespace + "--no-selected"
   });
 }
@@ -187,7 +190,7 @@ var getRowClassName = (function (hoverID) {
   };
 });
 
-var _excluded$1 = ["columns", "dataSource", "hidePagination", "loading", "onChange", "onRowClick", "pagination", "isMessage"];
+var _excluded$2 = ["columns", "dataSource", "hidePagination", "loading", "onChange", "onRowClick", "pagination", "isMessage"];
 
 function Table(_ref) {
   var columns = _ref.columns,
@@ -201,7 +204,7 @@ function Table(_ref) {
       pagination = _ref.pagination,
       _ref$isMessage = _ref.isMessage,
       isMessage = _ref$isMessage === void 0 ? false : _ref$isMessage,
-      rest = _objectWithoutPropertiesLoose(_ref, _excluded$1);
+      rest = _objectWithoutPropertiesLoose(_ref, _excluded$2);
 
   var _useState = React.useState(''),
       hover = _useState[0],
@@ -356,7 +359,7 @@ function TextCollapse(_ref) {
 }
 
 exports.Breadcrumb = Breadcrumb;
-exports.Icons = index;
+exports.Icon = Icon;
 exports.SelectAsync = SelectAsync;
 exports.Table = Table;
 exports.TextCollapse = TextCollapse;
