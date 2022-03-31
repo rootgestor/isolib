@@ -1,3 +1,7 @@
+export * as Icons from './components/atoms/Icon';
+export * from './typings';
+
+/** Molecules */
 export * from './components/molecules/Breadcrumb/typings';
 export { default as Breadcrumb } from './components/molecules/Breadcrumb';
 
@@ -9,5 +13,3 @@ export { default as Table } from './components/molecules/Table';
 
 export * from './components/molecules/TextCollapse/typings';
 export { default as TextCollapse } from './components/molecules/TextCollapse';
-
-export * from './typings';

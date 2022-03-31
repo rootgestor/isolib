@@ -1,11 +1,32 @@
+import * as icons from '@ant-design/icons';
+import { BellFilled, BellOutlined } from '@ant-design/icons';
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import DefaultBreadcrumb from 'antd/lib/breadcrumb';
 import Select from 'antd/lib/select';
 import debounce from 'lodash-es/debounce';
 import DefaultTable from 'antd/lib/table';
-import { BellFilled, BellOutlined } from '@ant-design/icons';
 import DefaultButton from 'antd/lib/button';
 import classNames from 'classnames';
+
+function Custom(_ref) {
+  var src = _ref.src;
+  return React.createElement("img", {
+    style: {
+      width: '25px',
+      height: '25px',
+      padding: '5px'
+    },
+    src: src
+  });
+}
+
+
+
+var index = {
+  __proto__: null,
+  Icons: icons,
+  CustomIcon: Custom
+};
 
 var Breadcrumb = function Breadcrumb(_ref) {
   var breadcrumbNameMap = _ref.breadcrumbNameMap,
@@ -328,5 +349,5 @@ function TextCollapse(_ref) {
   }, collapsed ? textMore : textLess)));
 }
 
-export { Breadcrumb, SelectAsync, Table, TextCollapse };
+export { Breadcrumb, index as Icons, SelectAsync, Table, TextCollapse };
 //# sourceMappingURL=isolib.esm.js.map

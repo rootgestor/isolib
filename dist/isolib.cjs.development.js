@@ -4,15 +4,35 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
+var icons = require('@ant-design/icons');
 var React = require('react');
 var React__default = _interopDefault(React);
 var DefaultBreadcrumb = _interopDefault(require('antd/lib/breadcrumb'));
 var Select = _interopDefault(require('antd/lib/select'));
 var debounce = _interopDefault(require('lodash/debounce'));
 var DefaultTable = _interopDefault(require('antd/lib/table'));
-var icons = require('@ant-design/icons');
 var DefaultButton = _interopDefault(require('antd/lib/button'));
 var classNames = _interopDefault(require('classnames'));
+
+function Custom(_ref) {
+  var src = _ref.src;
+  return React__default.createElement("img", {
+    style: {
+      width: '25px',
+      height: '25px',
+      padding: '5px'
+    },
+    src: src
+  });
+}
+
+
+
+var index = {
+  __proto__: null,
+  Icons: icons,
+  CustomIcon: Custom
+};
 
 var Breadcrumb = function Breadcrumb(_ref) {
   var breadcrumbNameMap = _ref.breadcrumbNameMap,
@@ -336,6 +356,7 @@ function TextCollapse(_ref) {
 }
 
 exports.Breadcrumb = Breadcrumb;
+exports.Icons = index;
 exports.SelectAsync = SelectAsync;
 exports.Table = Table;
 exports.TextCollapse = TextCollapse;

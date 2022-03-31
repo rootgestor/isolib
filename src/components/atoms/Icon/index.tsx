@@ -1,2 +1,2 @@
-export * from '@ant-design/icons';
+export * as Icons from '@ant-design/icons';
 export { Custom as CustomIcon } from './Custom';
