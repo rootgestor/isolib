@@ -1,14 +1,14 @@
 import React from 'react';
-import { SelectAsync } from '../dist/index';
-// const { render } = require('@testing-library/react');
+import { SelectAsync, SelectAsyncProps } from '../src/index';
 const ShallowRenderer = require('react-test-renderer/shallow');
 
-const args = {
+const args: SelectAsyncProps = {
   mode: 'multiple',
   placeholder: 'Select users',
   style: { width: '100%' },
-  defaultValue: ['asdj'],
-  defaultOptions: [{ label: 'sasasdss', value: 'asdj' }],
+  defaultValue: ['value'],
+  fetchOptions: () => Promise.resolve([]),
+  defaultOptions: [{ label: 'label', value: 'value' }],
 };
 
 describe('SelectAsync', () => {

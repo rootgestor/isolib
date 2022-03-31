@@ -1,6 +1,5 @@
 import React from 'react';
-import { Breadcrumb } from '../dist/index';
-// const { render } = require('@testing-library/react');
+import { Breadcrumb } from '../src/index';
 const ShallowRenderer = require('react-test-renderer/shallow');
 
 const args = {

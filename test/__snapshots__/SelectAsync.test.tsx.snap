@@ -12,8 +12,8 @@ exports[`SelectAsync render snapshot 1`] = `
   options={
     Array [
       Object {
-        "label": "sasasdss",
-        "value": "asdj",
+        "label": "label",
+        "value": "value",
       },
     ]
   }
@@ -25,7 +25,7 @@ exports[`SelectAsync render snapshot 1`] = `
   }
   value={
     Array [
-      "asdj",
+      "value",
     ]
   }
 />
