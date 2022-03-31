@@ -200,7 +200,7 @@ function Table(_ref) {
   };
 
   return React.createElement("div", {
-    className: "" + (isMessage ? 'isolib-table-msg' : '')
+    className: "isolib-table " + (isMessage ? 'isolib-table-msg' : '')
   }, React.createElement(DefaultTable, Object.assign({
     size: "middle",
     scroll: {

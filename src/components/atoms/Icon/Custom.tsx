@@ -4,5 +4,7 @@ export interface IconProps {
 }
 
 export function Custom({ src }: IconProps) {
-  return <img className="isolib-custom-icon" src={src} />;
+  return (
+    <img style={{ width: '25px', height: '25px', padding: '5px' }} src={src} />
+  );
 }
