@@ -67,12 +67,11 @@ function Icon(_ref) {
 var Breadcrumb = function Breadcrumb(_ref) {
   var breadcrumbNameMap = _ref.breadcrumbNameMap,
       onClick = _ref.onClick;
-  var urlList = Object.keys(breadcrumbNameMap);
 
   var handleClick = function handleClick(url) {
     return function (event) {
       event.preventDefault();
-      onClick(url);
+      if (url) onClick(url);
       return false;
     };
   };
@@ -81,12 +80,14 @@ var Breadcrumb = function Breadcrumb(_ref) {
     style: {
       margin: '16px 0'
     }
-  }, urlList.map(function (url) {
+  }, breadcrumbNameMap.map(function (_ref2) {
+    var label = _ref2.label,
+        href = _ref2.href;
     return React.createElement(DefaultBreadcrumb.Item, {
-      key: url,
+      key: href,
       href: "#",
-      onClick: handleClick(url)
-    }, breadcrumbNameMap[url]);
+      onClick: handleClick(href)
+    }, label);
   }));
 };
 

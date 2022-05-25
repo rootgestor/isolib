@@ -3,21 +3,19 @@ import DefaultBreadcrumb from 'antd/lib/breadcrumb';
 import type { BreadcrumbProps } from './typings';
 
 const Breadcrumb = ({ breadcrumbNameMap, onClick }: BreadcrumbProps) => {
-  const urlList: string[] = Object.keys(breadcrumbNameMap);
-
   const handleClick =
-    (url: string) =>
+    (url?: string) =>
     (event: React.MouseEvent): boolean => {
       event.preventDefault();
-      onClick(url);
+      if (url) onClick(url);
       return false;
     };
 
   return (
     <DefaultBreadcrumb style={{ margin: '16px 0' }}>
-      {urlList.map((url) => (
-        <DefaultBreadcrumb.Item key={url} href="#" onClick={handleClick(url)}>
-          {breadcrumbNameMap[url]}
+      {breadcrumbNameMap.map(({ label, href }) => (
+        <DefaultBreadcrumb.Item key={href} href="#" onClick={handleClick(href)}>
+          {label}
         </DefaultBreadcrumb.Item>
       ))}
     </DefaultBreadcrumb>

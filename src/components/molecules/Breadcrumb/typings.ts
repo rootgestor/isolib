@@ -1,4 +1,8 @@
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
 export interface BreadcrumbProps {
-  breadcrumbNameMap: { [key: string]: string };
+  breadcrumbNameMap: BreadcrumbItem[];
   onClick: (url: string) => void;
 }
