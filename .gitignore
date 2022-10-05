@@ -4,3 +4,4 @@ node_modules
 /coverage
 /storybook-static
 .cache
+.pre-commit-config.yaml

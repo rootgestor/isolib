@@ -61,11 +61,9 @@ function Icon(_ref) {
   }
 
   return React__default.createElement("img", {
-    style: {
-      width: '25px',
-      height: '25px',
+    style: _extends({
       padding: '5px'
-    },
+    }, args),
     src: src
   });
 }

@@ -2,6 +2,9 @@ import React from 'react';
 import * as Icons from '@ant-design/icons';
 export interface IconProps {
   src: string;
+  width?: string | number;
+  height?: string | number;
+  style?: {};
 }
 
 function Icon({ src, ...args }: IconProps) {
@@ -10,9 +13,8 @@ function Icon({ src, ...args }: IconProps) {
   if (Icon) {
     return <Icon {...args} />;
   }
-  return (
-    <img style={{ width: '25px', height: '25px', padding: '5px' }} src={src} />
-  );
+
+  return <img style={{ padding: '5px', ...args }} src={src} />;
 }
 
 export default Icon;
