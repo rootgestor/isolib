@@ -1,0 +1,18 @@
+@import (less) 'antd/lib/style/default.less';
+@import (less) 'antd/lib/modal/style/index.less';
+@import (less) './FlowNode.less';
+
+.react-flow-global-container {
+  @import (less) 'reactflow/dist/style.css';
+
+  .react-flow__handle-bottom,
+  .react-flow__handle-top {
+    background: #b1b1b7;
+  }
+}
+
+.flow-modal-add-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Container, Button, Internal } from './components';
+import { Container, ButtonCollapse, Internal } from './components';
 import type { TextCollapseProps } from './typings';
 
 function TextCollapse({
@@ -32,14 +32,14 @@ function TextCollapse({
     <Container style={style}>
       <Internal collapsed={collapsed} innerRef={internalRef} space={textSpace}>
         <span ref={textRef}>{children}</span>
-        <Button
+        <ButtonCollapse
           innerRef={buttonRef}
           collapsed={collapsed}
           onClick={handleClick}
           hidden={buttonHidden}
         >
           {collapsed ? textMore : textLess}
-        </Button>
+        </ButtonCollapse>
       </Internal>
     </Container>
   );

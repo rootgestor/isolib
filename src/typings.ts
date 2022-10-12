@@ -1,2 +1,1 @@
-export type PrimaryTypes = string | number | boolean;
-export type JSONType = { [key: string]: PrimaryTypes };
+export type JSONType = { [key: string]: string | number | boolean };

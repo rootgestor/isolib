@@ -15,7 +15,7 @@ export interface TextCollapseButtonProps {
   collapsed: boolean;
 }
 
-export interface ButtonProps {
+export interface ButtonCollapseProps {
   children?: JSX.Element | string;
   collapsed: boolean;
   hidden: boolean;

@@ -8,7 +8,6 @@ import type {
   TableRecord,
   TablePaginationConfig,
   SorterResult,
-  PrimaryTypes,
 } from '../../src';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -29,7 +28,7 @@ const columns = [
     title: 'Asunto',
     dataIndex: 'subject',
     key: 'subject',
-    render: (subject: PrimaryTypes, record: TableRecord) => (
+    render: (subject: string | number | boolean, record: TableRecord) => (
       <span>
         {subject}
         <span style={{ fontWeight: 200 }}>
@@ -49,7 +48,17 @@ const columns = [
   },
 ];
 
-const dataSource = [];
+interface RowExample {
+  _id: string | number;
+  fullname: string;
+  subject: string;
+  message: string;
+  date: string;
+  important: boolean;
+  read: boolean;
+}
+
+const dataSource: RowExample[] = [];
 
 for (let i = 1; i <= 31; i += 1) {
   dataSource.push({

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DefaultTable from 'antd/lib/table';
 import ImportantIcon from './components/ImportantIcon';
 import getRowClassName from './utils/getRowClassName';
-import { TableProps, TableRecord, PrimaryTypes } from '../../..';
+import { TableProps, TableRecord } from '../../..';
 
 function Table({
   columns,
@@ -24,7 +24,7 @@ function Table({
       dataIndex: 'important',
       key: 'important',
       width: 40,
-      render: (_i: PrimaryTypes, res: TableRecord) => (
+      render: (_i: string | number | boolean, res: TableRecord) => (
         <ImportantIcon {...res} />
       ),
     });

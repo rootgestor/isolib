@@ -1,14 +1,14 @@
 import React from 'react';
 import DefaultButton from 'antd/lib/button';
-import type { ButtonProps } from '../typings';
+import type { ButtonCollapseProps } from '../typings';
 
-export const Button = ({
+export const ButtonCollapse = ({
   children,
   collapsed,
   hidden,
   innerRef,
   onClick,
-}: ButtonProps) => {
+}: ButtonCollapseProps) => {
   return (
     <DefaultButton
       type="link"

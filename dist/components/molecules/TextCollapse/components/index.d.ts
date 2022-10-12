@@ -1,3 +1,3 @@
 export { Container } from './Container';
-export { Button } from './Button';
+export { ButtonCollapse } from './ButtonCollapse';
 export { Internal } from './Internal';

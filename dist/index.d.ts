@@ -9,3 +9,7 @@ export * from './components/molecules/Table/typings';
 export { default as Table } from './components/molecules/Table';
 export * from './components/molecules/TextCollapse/typings';
 export { default as TextCollapse } from './components/molecules/TextCollapse';
+export * from './components/molecules/Flow/typings';
+export { default as Flow } from './components/molecules/Flow';
+export * from './components/molecules/Button/typings';
+export { default as Button } from './components/molecules/Button';

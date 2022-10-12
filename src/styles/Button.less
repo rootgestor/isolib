@@ -1,0 +1,18 @@
+button.isolib__bigger-button {
+  text-align: center;
+  height: auto;
+
+  &:nth-child(odd) {
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+
+  &:nth-child(even) {
+    grid-column-start: 2;
+    grid-column-end: 3;
+  }
+
+  .isolib__bigger-button-icon {
+    font-size: 2rem;
+  }
+}

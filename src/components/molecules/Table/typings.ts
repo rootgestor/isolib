@@ -3,16 +3,15 @@ import {
   FilterValue,
   SorterResult as DefaultSorterResult,
 } from 'antd/lib/table/interface';
-import { PrimaryTypes } from '../../../typings';
 
 export { TablePaginationConfig, TableColumnType } from 'antd';
 export { FilterValue } from 'antd/lib/table/interface';
 
 export interface TableColumnProps extends TableColumnType<any> {
   render?: (
-    value: PrimaryTypes,
+    value: string | number | boolean,
     record: TableRecord
-  ) => JSX.Element | PrimaryTypes;
+  ) => JSX.Element | string | number | boolean;
 }
 
 export interface TableProps extends DefaultTableProps<any> {
@@ -27,7 +26,7 @@ export interface ImportantIconProps {
 }
 export interface TableRecord
   extends ImportantIconProps,
-    Partial<Record<string, PrimaryTypes | FilterValue | null>> {
+    Partial<Record<string, string | number | boolean | FilterValue | null>> {
   _id?: string;
   subject?: string;
   text?: string;
