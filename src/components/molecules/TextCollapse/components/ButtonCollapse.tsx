@@ -7,6 +7,7 @@ export const ButtonCollapse = ({
   collapsed,
   hidden,
   innerRef,
+  space,
   onClick,
 }: ButtonCollapseProps) => {
   return (
@@ -16,7 +17,7 @@ export const ButtonCollapse = ({
       ref={innerRef}
       hidden={hidden}
       onClick={onClick}
-      style={collapsed ? { position: 'absolute' } : {}}
+      style={collapsed ? { position: 'absolute', right: `-${space}px` } : {}}
     >
       {children}
     </DefaultButton>

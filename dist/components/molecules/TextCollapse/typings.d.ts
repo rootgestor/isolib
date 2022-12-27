@@ -20,6 +20,7 @@ export interface ButtonCollapseProps {
     collapsed: boolean;
     hidden: boolean;
     innerRef: any;
+    space: number;
     onClick: () => void;
 }
 export interface ContainerProps {

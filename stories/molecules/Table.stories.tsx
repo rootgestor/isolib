@@ -94,6 +94,13 @@ Default.args = {
     order: ${sorter.order}
     `),
   onRowClick: (record: TableRecord) => alert(`click id: ${record._id}`),
+  loading: false,
+};
+
+export const Loading = Template.bind({});
+Loading.args = {
+  ...Default.args,
+  loading: true,
 };
 
 export const Message = Template.bind({});

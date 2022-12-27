@@ -37,6 +37,7 @@ function TextCollapse({
           collapsed={collapsed}
           onClick={handleClick}
           hidden={buttonHidden}
+          space={textSpace}
         >
           {collapsed ? textMore : textLess}
         </ButtonCollapse>

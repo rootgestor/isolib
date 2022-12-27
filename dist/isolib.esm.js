@@ -276,6 +276,7 @@ var ButtonCollapse = function ButtonCollapse(_ref) {
       collapsed = _ref.collapsed,
       hidden = _ref.hidden,
       innerRef = _ref.innerRef,
+      space = _ref.space,
       onClick = _ref.onClick;
   return React.createElement(DefaultButton, {
     type: "link",
@@ -284,7 +285,8 @@ var ButtonCollapse = function ButtonCollapse(_ref) {
     hidden: hidden,
     onClick: onClick,
     style: collapsed ? {
-      position: 'absolute'
+      position: 'absolute',
+      right: "-" + space + "px"
     } : {}
   }, children);
 };
@@ -349,7 +351,8 @@ function TextCollapse(_ref) {
     innerRef: buttonRef,
     collapsed: collapsed,
     onClick: handleClick,
-    hidden: buttonHidden
+    hidden: buttonHidden,
+    space: textSpace
   }, collapsed ? textMore : textLess)));
 }
 
