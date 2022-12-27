@@ -10,7 +10,11 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 function Template(args: any) {
-  return <Flow {...args}></Flow>;
+  return (
+    <>
+      <Flow {...args}></Flow>
+    </>
+  );
 }
 
 function CustomForm(props) {
@@ -88,8 +92,7 @@ WithNodes.args = {
 export const WithNodesAndActions = Template.bind({});
 WithNodesAndActions.args = {
   ...WithNodes.args,
-  onRemove: (node) => console.log('onRemove Node: ', node),
-  onAdd: (node) => console.log('onAdd Node: ', node),
+  onChange: (node) => console.log('onChange Node: ', node),
 };
 
 export const StaticNodes = Template.bind({});

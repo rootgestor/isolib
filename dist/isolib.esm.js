@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo, useEffect, memo } from 'react';
+import React, { useState, useRef, useMemo, useEffect, memo, useCallback } from 'react';
 import * as Icons from '@ant-design/icons';
 import { BellFilled, BellOutlined } from '@ant-design/icons';
 import DefaultBreadcrumb from 'antd/lib/breadcrumb';
@@ -7,7 +7,7 @@ import debounce from 'lodash-es/debounce';
 import DefaultTable from 'antd/lib/table';
 import DefaultButton from 'antd/lib/button';
 import classNames from 'classnames';
-import ReactFlow, { Handle, Position, getBezierPath, useNodesState, useEdgesState, Controls } from 'reactflow';
+import ReactFlow, { Handle, Position, getBezierPath, useNodesState, useEdgesState, addEdge, Controls } from 'reactflow';
 import Modal from 'antd/lib/modal';
 
 function _extends() {
@@ -391,8 +391,7 @@ var FlowNode = /*#__PURE__*/memo(function (_ref) {
       color = _data$color === void 0 ? '#6938fb' : _data$color;
   return React.createElement(React.Fragment, null, React.createElement(Handle, {
     type: "target",
-    position: Position.Top,
-    isConnectable: false
+    position: Position.Top
   }), React.createElement("div", {
     className: "react-flow__custom-node"
   }, React.createElement("div", {
@@ -423,8 +422,7 @@ var FlowNode = /*#__PURE__*/memo(function (_ref) {
     style: {
       bottom: 10,
       top: 'auto'
-    },
-    isConnectable: false
+    }
   }));
 });
 
@@ -468,14 +466,14 @@ var FlowEdge = function FlowEdge(_ref) {
     className: "react-flow__edge-path",
     d: edgePath,
     markerEnd: markerEnd
-  }), !(data != null && data["static"]) && React.createElement("g", {
+  }), !(data != null && data["static"]) && React.createElement(React.Fragment, null, React.createElement("g", {
     transform: "translate(" + X + ", " + Y + ")",
     onClick: function onClick() {
-      return data == null ? void 0 : data.onClick(node, edge);
+      return data == null ? void 0 : data.onAdd(node, edge);
     }
   }, React.createElement("rect", {
     x: "-10",
-    y: "-10",
+    y: "-20",
     width: "18",
     ry: "4",
     rx: "4",
@@ -484,9 +482,27 @@ var FlowEdge = function FlowEdge(_ref) {
     stroke: mainColor
   }), React.createElement("text", {
     fill: mainColor,
-    y: "3",
+    y: "-7",
     x: "-5"
-  }, "+")));
+  }, "+")), React.createElement("g", {
+    transform: "translate(" + X + ", " + Y + ")",
+    onClick: function onClick() {
+      return data == null ? void 0 : data.onRemove(edge);
+    }
+  }, React.createElement("rect", {
+    x: "-10",
+    y: "2",
+    width: "18",
+    ry: "4",
+    rx: "4",
+    height: "18",
+    fill: "white",
+    stroke: mainColor
+  }), React.createElement("text", {
+    fill: mainColor,
+    y: "15",
+    x: "-4"
+  }, "-"))));
 };
 /**
  *
@@ -546,15 +562,25 @@ var NodeTypeModal = function NodeTypeModal(_ref) {
   })));
 };
 
-var exportNode = function exportNode(nodes) {
+var exportNode = function exportNode(nodes, edges) {
   return nodes.filter(function (node) {
     return node.type === 'FlowNode';
   }).map(function (_ref) {
-    var data = _ref.data;
+    var _edges$find, _edges$find2;
+
+    var data = _ref.data,
+        id = _ref.id;
+    var source = (_edges$find = edges.find(function (edge) {
+      return edge.source === id;
+    })) == null ? void 0 : _edges$find.id;
+    var target = (_edges$find2 = edges.find(function (edge) {
+      return edge.target === id;
+    })) == null ? void 0 : _edges$find2.id;
     var variables = {
       label: data.label,
       icon: data.icon
     };
+    if (!source || !target) variables.unrelated = true;
     if (data.color) variables.color = data.color;
     if (data["static"]) variables["static"] = data["static"];
     if (data.payload) variables.payload = data.payload;
@@ -645,8 +671,7 @@ var initialEdges = [{
 var useFlow = function useFlow(_ref) {
   var _ref$defaultNodes = _ref.defaultNodes,
       defaultNodes = _ref$defaultNodes === void 0 ? [] : _ref$defaultNodes,
-      onRemove = _ref.onRemove,
-      onAdd = _ref.onAdd,
+      onChange = _ref.onChange,
       openModal = _ref.openModal,
       draggable = _ref.draggable;
   var EdgeDataRef = useRef({
@@ -664,13 +689,56 @@ var useFlow = function useFlow(_ref) {
       setEdges = _useEdgesState[1],
       onEdgesChange = _useEdgesState[2];
 
-  var onClickEdge = function onClickEdge(idNode, idEdge) {
+  var onAddEdge = function onAddEdge(idNode, idEdge) {
     EdgeDataRef.current = {
       idNode: idNode,
       idEdge: idEdge
     };
     openModal(true);
   };
+
+  var onRemoveEdge = function onRemoveEdge(idEdge) {
+    var nodeList = [];
+    var edgeList = [];
+    setNodes(function (nodes) {
+      nodeList = [].concat(nodes);
+      return nodes;
+    });
+    setEdges(function (edges) {
+      edgeList = edges.filter(function (edge) {
+        return edge.id !== idEdge;
+      });
+      return edgeList;
+    });
+
+    if (onChange) {
+      onChange(exportNode(nodeList, edgeList));
+    }
+  };
+
+  var onConnect = useCallback(function (params) {
+    var nodeList = [];
+    var edgeList = [];
+    setNodes(function (nodes) {
+      nodeList = [].concat(nodes);
+      return nodes;
+    });
+    setEdges(function (eds) {
+      var targets = eds.filter(function (ed) {
+        return ed.target === params.target || ed.source === params.target;
+      });
+      var sources = eds.filter(function (ed) {
+        return ed.target === params.source || ed.source === params.source;
+      });
+      if (targets.length > 1 || sources.length > 1) return eds;
+      edgeList = addEdge(buildFlowEdge(params), eds);
+      return edgeList;
+    });
+
+    if (onChange) {
+      onChange(exportNode(nodeList, edgeList));
+    }
+  }, []);
 
   var buildFlowEdge = function buildFlowEdge(data) {
     var curDate = String(Math.random() * 100000);
@@ -684,13 +752,15 @@ var useFlow = function useFlow(_ref) {
       data: {
         target: target,
         "static": data["static"],
-        onClick: onClickEdge
+        onAdd: onAddEdge,
+        onRemove: onRemoveEdge
       }
     };
   };
 
   var handleRemove = function handleRemove(id) {
     var nodeList = [];
+    var edgeList = [];
     setNodes(function (nodes) {
       setEdges(function (edges) {
         var index = nodes.findIndex(function (node) {
@@ -707,7 +777,8 @@ var useFlow = function useFlow(_ref) {
         var filtered = edges.filter(function (edge) {
           return edge.source !== id && edge.target !== id;
         });
-        return [].concat(filtered, [added]);
+        edgeList = [].concat(filtered, [added]);
+        return edgeList;
       });
       nodeList = nodes.filter(function (node) {
         return node.id !== id;
@@ -715,8 +786,8 @@ var useFlow = function useFlow(_ref) {
       return nodesRelocation(nodeList);
     });
 
-    if (onRemove) {
-      onRemove(exportNode(nodeList));
+    if (onChange) {
+      onChange(exportNode(nodeList, edgeList));
     }
   };
 
@@ -742,6 +813,7 @@ var useFlow = function useFlow(_ref) {
   var handleAdd = function handleAdd(defaultNode) {
     return function (payload) {
       var nodesCopy = [];
+      var edgeCopy = [];
       var _EdgeDataRef$current = EdgeDataRef.current,
           idNode = _EdgeDataRef$current.idNode,
           idEdge = _EdgeDataRef$current.idEdge;
@@ -752,9 +824,6 @@ var useFlow = function useFlow(_ref) {
             return edge.id === idEdge;
           });
           if (!deleted) return edges;
-          var edgeCopy = edges.filter(function (edge) {
-            return edge.id !== idEdge;
-          });
           var addedEdges = [buildFlowEdge({
             source: deleted.source,
             target: node.id
@@ -762,7 +831,10 @@ var useFlow = function useFlow(_ref) {
             source: node.id,
             target: deleted.target
           })];
-          return edgeCopy.concat(addedEdges);
+          edgeCopy = edges.filter(function (edge) {
+            return edge.id !== idEdge;
+          }).concat(addedEdges);
+          return edgeCopy;
         });
         nodesCopy = [].concat(nodes);
         var index = nodesCopy.findIndex(function (node) {
@@ -772,8 +844,8 @@ var useFlow = function useFlow(_ref) {
         return nodesRelocation(nodesCopy);
       });
 
-      if (onAdd) {
-        onAdd(exportNode(nodesCopy));
+      if (onChange) {
+        onChange(exportNode(nodesCopy, edgeCopy));
       }
 
       openModal(false);
@@ -820,7 +892,8 @@ var useFlow = function useFlow(_ref) {
     edges: edges,
     onNodesChange: onNodesChange,
     onEdgesChange: onEdgesChange,
-    handleAdd: handleAdd
+    handleAdd: handleAdd,
+    onConnect: onConnect
   };
 };
 
@@ -837,13 +910,11 @@ var Flow = function Flow(props) {
       openModal = _useState2[1];
 
   var defaultNodes = props.defaultNodes,
-      onRemove = props.onRemove,
       draggable = props.draggable,
-      onAdd = props.onAdd;
+      onChange = props.onChange;
   var flowParams = {
     defaultNodes: defaultNodes,
-    onRemove: onRemove,
-    onAdd: onAdd,
+    onChange: onChange,
     openModal: openModal,
     draggable: draggable
   };

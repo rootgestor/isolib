@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { useNodesState, useEdgesState } from 'reactflow';
+import React, { useEffect, useRef, useCallback } from 'react';
+import { useNodesState, useEdgesState, addEdge } from 'reactflow';
 import { exportNode, nodesRelocation } from '../helpers';
 
 import { mainColor, dxBetweenStartAndNode } from '../helpers';
@@ -70,16 +70,14 @@ interface BuildFlowData {
 
 interface FlowHookProps {
   openModal: (isOpen: boolean) => void;
-  onAdd?: (nodes: FlowDefaultNode[]) => void;
-  onRemove?: (nodes: FlowDefaultNode[]) => void;
+  onChange?: (nodes: FlowDefaultNode[]) => void;
   defaultNodes?: FlowDefaultNode[];
   draggable?: boolean;
 }
 
 const useFlow = ({
   defaultNodes = [],
-  onRemove,
-  onAdd,
+  onChange,
   openModal,
   draggable,
 }: FlowHookProps) => {
@@ -87,10 +85,58 @@ const useFlow = ({
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  const onClickEdge = (idNode: string, idEdge: string) => {
+  const onAddEdge = (idNode: string, idEdge: string) => {
     EdgeDataRef.current = { idNode, idEdge };
     openModal(true);
   };
+
+  const onRemoveEdge = (idEdge: string) => {
+    let nodeList: FlowNode[] = [];
+    let edgeList: FlowEdge[] = [];
+
+    setNodes((nodes) => {
+      nodeList = [...nodes];
+      return nodes;
+    });
+
+    setEdges((edges: FlowEdge[]) => {
+      edgeList = edges.filter((edge) => edge.id !== idEdge);
+      return edgeList;
+    });
+
+    if (onChange) {
+      onChange(exportNode(nodeList, edgeList));
+    }
+  };
+
+  const onConnect = useCallback((params) => {
+    let nodeList: FlowNode[] = [];
+    let edgeList: FlowEdge[] = [];
+
+    setNodes((nodes) => {
+      nodeList = [...nodes];
+      return nodes;
+    });
+
+    setEdges((eds: FlowEdge[]) => {
+      const targets = eds.filter(
+        (ed) => ed.target === params.target || ed.source === params.target
+      );
+
+      const sources = eds.filter(
+        (ed) => ed.target === params.source || ed.source === params.source
+      );
+
+      if (targets.length > 1 || sources.length > 1) return eds;
+
+      edgeList = addEdge(buildFlowEdge(params), eds);
+      return edgeList;
+    });
+
+    if (onChange) {
+      onChange(exportNode(nodeList, edgeList));
+    }
+  }, []);
 
   const buildFlowEdge = (data: BuildFlowData): FlowEdge => {
     const curDate = String(Math.random() * 100000);
@@ -103,16 +149,18 @@ const useFlow = ({
       data: {
         target,
         static: data.static,
-        onClick: onClickEdge,
+        onAdd: onAddEdge,
+        onRemove: onRemoveEdge,
       },
     };
   };
 
   const handleRemove = (id: string) => {
     let nodeList: FlowNode[] = [];
+    let edgeList: FlowEdge[] = [];
 
     setNodes((nodes) => {
-      setEdges((edges) => {
+      setEdges((edges: FlowEdge[]) => {
         const index = nodes.findIndex((node) => node.id === id);
 
         const afterElement = nodes[index + 1];
@@ -128,15 +176,17 @@ const useFlow = ({
         const filtered = edges.filter(
           (edge) => edge.source !== id && edge.target !== id
         );
-        return [...filtered, added];
+
+        edgeList = [...filtered, added];
+        return edgeList;
       });
 
       nodeList = nodes.filter((node) => node.id !== id);
       return nodesRelocation(nodeList);
     });
 
-    if (onRemove) {
-      onRemove(exportNode(nodeList));
+    if (onChange) {
+      onChange(exportNode(nodeList, edgeList));
     }
   };
 
@@ -161,16 +211,15 @@ const useFlow = ({
   const handleAdd =
     (defaultNode: FlowDefaultNode) => (payload: payloadType) => {
       let nodesCopy: FlowNode[] = [];
+      let edgeCopy: FlowEdge[] = [];
 
       const { idNode, idEdge } = EdgeDataRef.current;
       const node = buildFlowNode(defaultNode, payload);
 
       setNodes((nodes) => {
-        setEdges((edges) => {
+        setEdges((edges: FlowEdge[]) => {
           const deleted = edges.find((edge) => edge.id === idEdge);
           if (!deleted) return edges;
-
-          const edgeCopy = edges.filter((edge) => edge.id !== idEdge);
 
           const addedEdges = [
             buildFlowEdge({
@@ -183,7 +232,10 @@ const useFlow = ({
             }),
           ];
 
-          return edgeCopy.concat(addedEdges);
+          edgeCopy = edges
+            .filter((edge) => edge.id !== idEdge)
+            .concat(addedEdges);
+          return edgeCopy;
         });
 
         nodesCopy = [...nodes];
@@ -192,8 +244,8 @@ const useFlow = ({
         return nodesRelocation(nodesCopy);
       });
 
-      if (onAdd) {
-        onAdd(exportNode(nodesCopy));
+      if (onChange) {
+        onChange(exportNode(nodesCopy, edgeCopy));
       }
 
       openModal(false);
@@ -239,6 +291,7 @@ const useFlow = ({
     onNodesChange,
     onEdgesChange,
     handleAdd,
+    onConnect,
   };
 };
 

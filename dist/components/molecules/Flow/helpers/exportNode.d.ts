@@ -1,3 +1,3 @@
-import type { Node } from 'reactflow';
+import type { Node, Edge } from 'reactflow';
 import type { FlowDefaultNode } from '../typings';
-export declare const exportNode: (nodes: Node[]) => FlowDefaultNode[];
+export declare const exportNode: (nodes: Node[], edges: Edge[]) => FlowDefaultNode[];

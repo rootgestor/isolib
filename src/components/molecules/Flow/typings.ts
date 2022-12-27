@@ -34,6 +34,7 @@ export interface FlowDefaultNode {
   icon: string;
   static?: boolean;
   color?: string;
+  unrelated?: boolean;
   payload?: payloadType;
 }
 
@@ -42,7 +43,6 @@ export interface FlowNodeType {
   icon: string;
   label: string;
   form: (props: NoteTypeFormProps) => JSX.Element;
-  onClick: (id: string) => void;
 }
 
 export interface FlowProps {
@@ -50,8 +50,7 @@ export interface FlowProps {
   draggable?: boolean;
   defaultNodes?: FlowDefaultNode[];
   nodeTypes: FlowNodeType[];
-  onRemove?: (nodes: FlowDefaultNode[]) => void;
-  onAdd?: (nodes: FlowDefaultNode[]) => void;
+  onChange?: (nodes: FlowDefaultNode[]) => void;
 }
 
 export interface ReactFlowSetters {

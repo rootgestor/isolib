@@ -26,7 +26,8 @@
   },
   "peerDependencies": {
     "lodash-es": ">=4",
-    "react": ">=16"
+    "react": ">=16",
+    "reactflow": ">=11"
   },
   "husky": {
     "hooks": {

@@ -6,7 +6,7 @@ export const FlowNode = memo(({ data }: any) => {
   const { icon, label, onRemove, color = '#6938fb' } = data;
   return (
     <>
-      <Handle type="target" position={Position.Top} isConnectable={false} />
+      <Handle type="target" position={Position.Top} />
       <div className="react-flow__custom-node">
         <div
           className="react-flow__custom-node-container"
@@ -36,7 +36,6 @@ export const FlowNode = memo(({ data }: any) => {
         position={Position.Bottom}
         id="b"
         style={{ bottom: 10, top: 'auto' }}
-        isConnectable={false}
       />
     </>
   );

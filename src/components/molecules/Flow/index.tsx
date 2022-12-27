@@ -19,8 +19,8 @@ const Flow = (props: FlowProps) => {
   const [horizontal, setHorizontal] = useState(0);
   const [isOpen, openModal] = useState(false);
 
-  const { defaultNodes, onRemove, draggable, onAdd } = props;
-  const flowParams = { defaultNodes, onRemove, onAdd, openModal, draggable };
+  const { defaultNodes, draggable, onChange } = props;
+  const flowParams = { defaultNodes, onChange, openModal, draggable };
 
   const flow = useFlow(flowParams);
 
