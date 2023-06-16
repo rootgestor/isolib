@@ -6,15 +6,15 @@ export interface TableColumnProps<T>
   extends Omit<TableColumnType<T>, 'render'> {
   render?: (
     value: string | number | boolean,
-    record: TableRecord<T>
-  ) => JSX.Element | string | number | boolean;
+    record: T | TableRecord<T>
+  ) => JSX.Element | string | number | boolean | T;
 }
 
 export interface TableProps<T = Record<string, any>>
   extends Omit<DefaultTableProps<T>, 'columns'> {
   columns: TableColumnProps<T>[];
   hidePagination?: boolean;
-  onRowClick?: (record: TableRecord<T>) => void;
+  onRowClick?: (record: T | TableRecord<T>) => void;
   isMessage?: boolean;
 }
 
