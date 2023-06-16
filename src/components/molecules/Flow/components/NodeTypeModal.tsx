@@ -11,7 +11,7 @@ const NodeTypeModal = ({
   icon,
   label,
   i18n,
-  form,
+  modal,
   onSubmit,
 }: NoteTypeModalProps) => {
   const tt = useTranslate(i18n);
@@ -19,6 +19,14 @@ const NodeTypeModal = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCloseModal = () => setIsOpen(false);
+
+  const handleClick = () => {
+    if (modal) {
+      setIsOpen(true);
+    } else {
+      onSubmit({});
+    }
+  };
 
   const handleSubmit = (payload: payloadType) => {
     onSubmit(payload);
@@ -30,21 +38,22 @@ const NodeTypeModal = ({
       <Button
         key={id}
         icon={icon}
-        onClick={() => setIsOpen(true)}
+        onClick={handleClick}
         size="bigger"
         className="flow-modal-add-item"
       >
         {label}
       </Button>
-
-      <Modal
-        title={tt('Add node')}
-        open={isOpen}
-        onCancel={handleCloseModal}
-        footer={[<Button onClick={handleCloseModal}>{tt('Close')}</Button>]}
-      >
-        {form({ onSubmit: handleSubmit })}
-      </Modal>
+      {!!modal && (
+        <Modal
+          title={tt('Add node')}
+          open={isOpen}
+          onCancel={handleCloseModal}
+          footer={[<Button onClick={handleCloseModal}>{tt('Close')}</Button>]}
+        >
+          {modal({ onSubmit: handleSubmit })}
+        </Modal>
+      )}
     </>
   );
 };

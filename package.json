@@ -22,7 +22,8 @@
     "size": "size-limit",
     "analyze": "size-limit --why",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "preinstall": "npx npm-force-resolutions"
   },
   "peerDependencies": {
     "lodash-es": ">=4",
@@ -52,6 +53,10 @@
       "limit": "10 KB"
     }
   ],
+  "dependencies": {
+    "reactflow": "^11.1.0",
+    "antd": "^5.1.1"
+  },
   "devDependencies": {
     "@ant-design/icons": "^4.8.0",
     "@babel/core": "^7.17.5",
@@ -69,7 +74,6 @@
     "@types/lodash": "^4.14.179",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.13",
-    "antd": "^5.1.1",
     "autoprefixer": "^10.4.2",
     "babel-loader": "^8.2.3",
     "classnames": "^2.3.1",
@@ -85,7 +89,6 @@
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
     "react-test-renderer": "^17.0.2",
-    "reactflow": "^11.1.0",
     "rollup-plugin-postcss": "^4.0.2",
     "size-limit": "^7.0.8",
     "storybook-preset-less": "^1.1.2",

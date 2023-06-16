@@ -12,7 +12,7 @@ export type onSubmitNoteType = (payload: payloadType) => void;
 
 export type payloadType = { [key: string]: any };
 
-export type i18nType = { [key: string]: any };
+export type i18nType = { [key: string]: string };
 
 export interface FlowNode extends Node {}
 
@@ -25,7 +25,8 @@ export interface NoteTypeModalProps {
   icon: string;
   label: string;
   i18n?: i18nType;
-  form: (props: NoteTypeFormProps) => JSX.Element;
+  modal?: (props: NoteTypeFormProps) => JSX.Element;
+  fields?: JSX.Element[];
   onSubmit: onSubmitNoteType;
 }
 
@@ -55,8 +56,8 @@ export interface FlowProps {
 }
 
 export interface ReactFlowSetters {
-  setNodes: React.Dispatch<React.SetStateAction<Node<any>[]>>;
-  setEdges: React.Dispatch<React.SetStateAction<Edge<any>[]>>;
+  setNodes: React.Dispatch<React.SetStateAction<Node[]>>;
+  setEdges: React.Dispatch<React.SetStateAction<Edge[]>>;
 }
 
 export interface HandleRemoveActions extends ReactFlowSetters {

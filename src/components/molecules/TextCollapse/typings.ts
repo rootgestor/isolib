@@ -19,7 +19,7 @@ export interface ButtonCollapseProps {
   children?: JSX.Element | string;
   collapsed: boolean;
   hidden: boolean;
-  innerRef: any;
+  innerRef: React.Ref<any>;
   space: number;
   onClick: () => void;
 }
@@ -32,6 +32,6 @@ export interface ContainerProps {
 export interface InternalProps {
   collapsed: boolean;
   space?: number;
-  innerRef: any;
+  innerRef: React.Ref<any>;
   children?: JSX.Element | JSX.Element[];
 }

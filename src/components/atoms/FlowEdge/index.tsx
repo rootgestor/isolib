@@ -1,5 +1,10 @@
 import React from 'react';
 import { getBezierPath } from 'reactflow';
+import type { BezierEdgeProps } from 'reactflow';
+
+interface FlowEdgeProps extends Omit<BezierEdgeProps, 'id'> {
+  id?: string;
+}
 
 export const FlowEdge = ({
   id,
@@ -12,7 +17,7 @@ export const FlowEdge = ({
   style = {},
   data,
   markerEnd,
-}: any): JSX.Element => {
+}: FlowEdgeProps): JSX.Element => {
   const mainColor = '#b1b1b7';
   const [edgePath] = getBezierPath({
     sourceX,

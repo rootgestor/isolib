@@ -1,3 +1,7 @@
 import { TableRecord } from '../typings';
-declare const _default: (hoverID: any) => (record: TableRecord) => string;
+interface BaseRecord {
+    _id?: string;
+    read?: boolean;
+}
+declare const _default: (hoverID: React.Key) => (record: TableRecord<BaseRecord>) => string;
 export default _default;

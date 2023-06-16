@@ -15,8 +15,7 @@ function Table({
   isMessage = false,
   ...rest
 }: TableProps) {
-  const [hover, setHover] =
-    useState<React.SetStateAction<string | undefined>>('');
+  const [hover, setHover] = useState<React.Key>('');
 
   const additionalColumns = [];
   if (isMessage) {
@@ -52,7 +51,7 @@ function Table({
         }
         onChange={onChange}
         loading={loading}
-        rowKey={(record: { [key: string]: any }) => record._id}
+        rowKey={(record) => record._id}
         rowClassName={isMessage ? getRowClassName(hover) : ''}
         onRow={(record) => ({
           onClick: handleRowClick(record),

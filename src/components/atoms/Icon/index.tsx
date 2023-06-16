@@ -9,7 +9,7 @@ export interface IconProps {
 
 function Icon({ src, ...args }: IconProps) {
   const key = src as keyof typeof Icons;
-  const Icon: any = Icons[key];
+  const Icon: Function = Icons[key];
   if (Icon) {
     return <Icon {...args} />;
   }
