@@ -18,52 +18,42 @@ var ReactFlow__default = _interopDefault(ReactFlow);
 var Modal = _interopDefault(require('antd/lib/modal'));
 
 function _extends() {
-  _extends = Object.assign || function (target) {
+  _extends = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
-
       for (var key in source) {
         if (Object.prototype.hasOwnProperty.call(source, key)) {
           target[key] = source[key];
         }
       }
     }
-
     return target;
   };
-
   return _extends.apply(this, arguments);
 }
-
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
   var sourceKeys = Object.keys(source);
   var key, i;
-
   for (i = 0; i < sourceKeys.length; i++) {
     key = sourceKeys[i];
     if (excluded.indexOf(key) >= 0) continue;
     target[key] = source[key];
   }
-
   return target;
 }
 
 var _excluded = ["src", "alt"];
-
 function Icon(_ref) {
   var src = _ref.src,
-      alt = _ref.alt,
-      args = _objectWithoutPropertiesLoose(_ref, _excluded);
-
+    alt = _ref.alt,
+    args = _objectWithoutPropertiesLoose(_ref, _excluded);
   var key = src;
   var Icon = Icons[key];
-
   if (Icon) {
     return React__default.createElement(Icon, Object.assign({}, args));
   }
-
   return React__default.createElement("img", {
     style: _extends({
       padding: '5px'
@@ -75,8 +65,7 @@ function Icon(_ref) {
 
 var Breadcrumb = function Breadcrumb(_ref) {
   var breadcrumbNameMap = _ref.breadcrumbNameMap,
-      onClick = _ref.onClick;
-
+    onClick = _ref.onClick;
   var handleClick = function handleClick(url) {
     return function (event) {
       event.preventDefault();
@@ -84,14 +73,13 @@ var Breadcrumb = function Breadcrumb(_ref) {
       return false;
     };
   };
-
   return React__default.createElement(DefaultBreadcrumb, {
     style: {
       margin: '16px 0'
     }
   }, breadcrumbNameMap.map(function (_ref2) {
     var label = _ref2.label,
-        href = _ref2.href;
+      href = _ref2.href;
     return React__default.createElement(DefaultBreadcrumb.Item, {
       key: href,
       href: "#",
@@ -101,30 +89,25 @@ var Breadcrumb = function Breadcrumb(_ref) {
 };
 
 var _excluded$1 = ["fetchOptions", "defaultOptions", "defaultValue", "onChange"];
-
 function SelectAsync(_ref) {
   var fetchOptions = _ref.fetchOptions,
-      defaultOptions = _ref.defaultOptions,
-      defaultValue = _ref.defaultValue,
-      onChange = _ref.onChange,
-      props = _objectWithoutPropertiesLoose(_ref, _excluded$1);
-
+    defaultOptions = _ref.defaultOptions,
+    defaultValue = _ref.defaultValue,
+    onChange = _ref.onChange,
+    props = _objectWithoutPropertiesLoose(_ref, _excluded$1);
   var _useState = React.useState(function () {
-    return defaultValue;
-  }),
-      value = _useState[0],
-      setValue = _useState[1];
-
+      return defaultValue;
+    }),
+    value = _useState[0],
+    setValue = _useState[1];
   var _useState2 = React.useState(function () {
-    return defaultOptions;
-  }),
-      options = _useState2[0],
-      setOptions = _useState2[1];
-
+      return defaultOptions;
+    }),
+    options = _useState2[0],
+    setOptions = _useState2[1];
   var _useState3 = React.useState(false),
-      loading = _useState3[0],
-      setLoading = _useState3[1];
-
+    loading = _useState3[0],
+    setLoading = _useState3[1];
   var fetchRef = React.useRef(0);
   var debounceFetcher = React.useMemo(function () {
     var loadOptions = function loadOptions(val) {
@@ -135,20 +118,16 @@ function SelectAsync(_ref) {
         if (fetchId !== fetchRef.current) {
           return;
         }
-
         setLoading(false);
         setOptions(newOptions);
       });
     };
-
     return debounce(loadOptions, 800);
   }, [fetchOptions]);
-
   var handleOnChange = function handleOnChange(val, option) {
     setValue(val);
     if (onChange) onChange(val, option);
   };
-
   return React__default.createElement(Select, Object.assign({
     labelInValue: true,
     filterOption: false,
@@ -165,13 +144,11 @@ function SelectAsync(_ref) {
 function ImportantIcon(_ref) {
   var important = _ref.important;
   var namespace = 'isolib-table-msg isolib-table-msg-icon';
-
   if (important) {
     return React__default.createElement(Icons.BellFilled, {
       className: namespace + "--selected"
     });
   }
-
   return React__default.createElement(Icons.BellOutlined, {
     className: namespace + "--no-selected"
   });
@@ -181,41 +158,34 @@ var getRowClassName = (function (hoverID) {
   return function (record) {
     var namespace = 'isolib-table-msg';
     var classnames = [namespace];
-
     if (record.read === false) {
       classnames.push(namespace + "--unread");
     }
-
     if (hoverID === record._id) {
       classnames.push(namespace + "--hover");
     }
-
     return classnames.join(' ');
   };
 });
 
 var _excluded$2 = ["columns", "dataSource", "hidePagination", "loading", "onChange", "onRowClick", "pagination", "isMessage"];
-
 function Table(_ref) {
   var columns = _ref.columns,
-      dataSource = _ref.dataSource,
-      _ref$hidePagination = _ref.hidePagination,
-      hidePagination = _ref$hidePagination === void 0 ? false : _ref$hidePagination,
-      _ref$loading = _ref.loading,
-      loading = _ref$loading === void 0 ? true : _ref$loading,
-      onChange = _ref.onChange,
-      onRowClick = _ref.onRowClick,
-      pagination = _ref.pagination,
-      _ref$isMessage = _ref.isMessage,
-      isMessage = _ref$isMessage === void 0 ? false : _ref$isMessage,
-      rest = _objectWithoutPropertiesLoose(_ref, _excluded$2);
-
+    dataSource = _ref.dataSource,
+    _ref$hidePagination = _ref.hidePagination,
+    hidePagination = _ref$hidePagination === void 0 ? false : _ref$hidePagination,
+    _ref$loading = _ref.loading,
+    loading = _ref$loading === void 0 ? true : _ref$loading,
+    onChange = _ref.onChange,
+    onRowClick = _ref.onRowClick,
+    pagination = _ref.pagination,
+    _ref$isMessage = _ref.isMessage,
+    isMessage = _ref$isMessage === void 0 ? false : _ref$isMessage,
+    rest = _objectWithoutPropertiesLoose(_ref, _excluded$2);
   var _useState = React.useState(''),
-      hover = _useState[0],
-      setHover = _useState[1];
-
+    hover = _useState[0],
+    setHover = _useState[1];
   var additionalColumns = [];
-
   if (isMessage) {
     additionalColumns.push({
       dataIndex: 'important',
@@ -226,13 +196,11 @@ function Table(_ref) {
       }
     });
   }
-
   var handleRowClick = function handleRowClick(record) {
     return function () {
       if (onRowClick) onRowClick(record);
     };
   };
-
   return React__default.createElement("div", {
     className: "isolib-table " + (isMessage ? 'isolib-table-msg' : '')
   }, React__default.createElement(DefaultTable, Object.assign({
@@ -272,8 +240,8 @@ function Table(_ref) {
 
 var Container = function Container(_ref) {
   var children = _ref.children,
-      _ref$style = _ref.style,
-      style = _ref$style === void 0 ? {} : _ref$style;
+    _ref$style = _ref.style,
+    style = _ref$style === void 0 ? {} : _ref$style;
   return React__default.createElement("div", {
     className: "isolib-text-collapse isolib-text-collapse-container",
     style: style
@@ -282,11 +250,11 @@ var Container = function Container(_ref) {
 
 var ButtonCollapse = function ButtonCollapse(_ref) {
   var children = _ref.children,
-      collapsed = _ref.collapsed,
-      hidden = _ref.hidden,
-      innerRef = _ref.innerRef,
-      space = _ref.space,
-      onClick = _ref.onClick;
+    collapsed = _ref.collapsed,
+    hidden = _ref.hidden,
+    innerRef = _ref.innerRef,
+    space = _ref.space,
+    onClick = _ref.onClick;
   return React__default.createElement(DefaultButton, {
     type: "link",
     className: "isolib-text-collapse-button",
@@ -302,9 +270,9 @@ var ButtonCollapse = function ButtonCollapse(_ref) {
 
 var Internal = function Internal(_ref) {
   var innerRef = _ref.innerRef,
-      collapsed = _ref.collapsed,
-      space = _ref.space,
-      children = _ref.children;
+    collapsed = _ref.collapsed,
+    space = _ref.space,
+    children = _ref.children;
   return React__default.createElement("div", {
     ref: innerRef,
     style: collapsed && space ? {
@@ -318,28 +286,23 @@ var Internal = function Internal(_ref) {
 
 function TextCollapse(_ref) {
   var children = _ref.children,
-      textSpace = _ref.textSpace,
-      textLess = _ref.textLess,
-      textMore = _ref.textMore,
-      _ref$style = _ref.style,
-      style = _ref$style === void 0 ? {} : _ref$style;
-
+    textSpace = _ref.textSpace,
+    textLess = _ref.textLess,
+    textMore = _ref.textMore,
+    _ref$style = _ref.style,
+    style = _ref$style === void 0 ? {} : _ref$style;
   var _useState = React.useState(true),
-      collapsed = _useState[0],
-      setCollapsed = _useState[1];
-
+    collapsed = _useState[0],
+    setCollapsed = _useState[1];
   var _useState2 = React.useState(true),
-      buttonHidden = _useState2[0],
-      setButtonHidden = _useState2[1];
-
+    buttonHidden = _useState2[0],
+    setButtonHidden = _useState2[1];
   var buttonRef = React.useRef(null);
   var internalRef = React.useRef(null);
   var textRef = React.useRef(null);
-
   var handleClick = function handleClick() {
     setCollapsed(!collapsed);
   };
-
   React.useEffect(function () {
     if (internalRef.current && textRef.current) {
       var textWidth = textRef.current.offsetWidth;
@@ -366,13 +329,11 @@ function TextCollapse(_ref) {
 }
 
 var _excluded$3 = ["icon", "size", "className"];
-
 function Button(props) {
   var icon = props.icon,
-      size = props.size,
-      className = props.className,
-      rest = _objectWithoutPropertiesLoose(props, _excluded$3);
-
+    size = props.size,
+    className = props.className,
+    rest = _objectWithoutPropertiesLoose(props, _excluded$3);
   if (size === 'bigger') {
     return React__default.createElement(Button, Object.assign({
       className: "isolib__bigger-button " + className
@@ -384,7 +345,6 @@ function Button(props) {
       src: icon
     })));
   }
-
   return React__default.createElement(DefaultButton, Object.assign({}, props, {
     className: className,
     size: size
@@ -394,10 +354,10 @@ function Button(props) {
 var FlowNode = /*#__PURE__*/React.memo(function (_ref) {
   var data = _ref.data;
   var icon = data.icon,
-      label = data.label,
-      onRemove = data.onRemove,
-      _data$color = data.color,
-      color = _data$color === void 0 ? '#6938fb' : _data$color;
+    label = data.label,
+    onRemove = data.onRemove,
+    _data$color = data.color,
+    color = _data$color === void 0 ? '#6938fb' : _data$color;
   return React__default.createElement(React__default.Fragment, null, React__default.createElement(ReactFlow.Handle, {
     type: "target",
     position: ReactFlow.Position.Top,
@@ -444,29 +404,27 @@ var FlowNode$1 = {
 
 var FlowEdge = function FlowEdge(_ref) {
   var id = _ref.id,
-      sourceX = _ref.sourceX,
-      sourceY = _ref.sourceY,
-      targetX = _ref.targetX,
-      targetY = _ref.targetY,
-      sourcePosition = _ref.sourcePosition,
-      targetPosition = _ref.targetPosition,
-      _ref$style = _ref.style,
-      style = _ref$style === void 0 ? {} : _ref$style,
-      data = _ref.data,
-      markerEnd = _ref.markerEnd;
+    sourceX = _ref.sourceX,
+    sourceY = _ref.sourceY,
+    targetX = _ref.targetX,
+    targetY = _ref.targetY,
+    sourcePosition = _ref.sourcePosition,
+    targetPosition = _ref.targetPosition,
+    _ref$style = _ref.style,
+    style = _ref$style === void 0 ? {} : _ref$style,
+    data = _ref.data,
+    markerEnd = _ref.markerEnd;
   var mainColor = '#b1b1b7';
-
   var _getBezierPath = ReactFlow.getBezierPath({
-    sourceX: sourceX,
-    sourceY: sourceY,
-    sourcePosition: sourcePosition,
-    targetX: targetX,
-    targetY: targetY,
-    targetPosition: targetPosition,
-    curvature: 0
-  }),
-      edgePath = _getBezierPath[0];
-
+      sourceX: sourceX,
+      sourceY: sourceY,
+      sourcePosition: sourcePosition,
+      targetX: targetX,
+      targetY: targetY,
+      targetPosition: targetPosition,
+      curvature: 0
+    }),
+    edgePath = _getBezierPath[0];
   var X = (sourceX + targetX) / 2;
   var Y = (sourceY + targetY) / 2;
   var node = data.target;
@@ -515,21 +473,18 @@ var useTranslate = function useTranslate(i18n) {
 
 var NodeTypeModal = function NodeTypeModal(_ref) {
   var id = _ref.id,
-      icon = _ref.icon,
-      label = _ref.label,
-      i18n = _ref.i18n,
-      modal = _ref.modal,
-      onSubmit = _ref.onSubmit;
+    icon = _ref.icon,
+    label = _ref.label,
+    i18n = _ref.i18n,
+    modal = _ref.modal,
+    onSubmit = _ref.onSubmit;
   var tt = useTranslate(i18n);
-
   var _useState = React.useState(false),
-      isOpen = _useState[0],
-      setIsOpen = _useState[1];
-
+    isOpen = _useState[0],
+    setIsOpen = _useState[1];
   var handleCloseModal = function handleCloseModal() {
     return setIsOpen(false);
   };
-
   var handleClick = function handleClick() {
     if (modal) {
       setIsOpen(true);
@@ -537,12 +492,10 @@ var NodeTypeModal = function NodeTypeModal(_ref) {
       onSubmit({});
     }
   };
-
   var handleSubmit = function handleSubmit(payload) {
     onSubmit(payload);
     handleCloseModal();
   };
-
   return React__default.createElement(React__default.Fragment, null, React__default.createElement(Button, {
     key: id,
     icon: icon,
@@ -582,7 +535,6 @@ var nodesRelocation = function nodesRelocation(nodes) {
     var isStart = key === 0;
     var isSecond = key === 1;
     var beforeItem = initial[key - 1];
-
     if (isStart) {
       node.position.y = 0;
     } else if (isSecond) {
@@ -591,11 +543,9 @@ var nodesRelocation = function nodesRelocation(nodes) {
       var positionY = beforeItem == null ? void 0 : beforeItem.position.y;
       node.position.y = positionY + dxBetweenNodes;
     }
-
     if ((beforeItem == null ? void 0 : beforeItem.id) !== 'start' && node.data["static"]) {
       node.position.y -= dxLessWhenStaticNode;
     }
-
     return [].concat(initial, [node]);
   }, []);
 };
@@ -656,29 +606,25 @@ var initialEdges = [{
   source: 'start',
   target: 'end'
 }];
-
 var useFlow = function useFlow(_ref) {
   var _ref$defaultNodes = _ref.defaultNodes,
-      defaultNodes = _ref$defaultNodes === void 0 ? [] : _ref$defaultNodes,
-      onRemove = _ref.onRemove,
-      onAdd = _ref.onAdd,
-      openModal = _ref.openModal,
-      draggable = _ref.draggable;
+    defaultNodes = _ref$defaultNodes === void 0 ? [] : _ref$defaultNodes,
+    onRemove = _ref.onRemove,
+    onAdd = _ref.onAdd,
+    openModal = _ref.openModal,
+    draggable = _ref.draggable;
   var EdgeDataRef = React.useRef({
     idNode: '',
     idEdge: ''
   });
-
   var _useNodesState = ReactFlow.useNodesState(initialNodes),
-      nodes = _useNodesState[0],
-      setNodes = _useNodesState[1],
-      onNodesChange = _useNodesState[2];
-
+    nodes = _useNodesState[0],
+    setNodes = _useNodesState[1],
+    onNodesChange = _useNodesState[2];
   var _useEdgesState = ReactFlow.useEdgesState(initialEdges),
-      edges = _useEdgesState[0],
-      setEdges = _useEdgesState[1],
-      onEdgesChange = _useEdgesState[2];
-
+    edges = _useEdgesState[0],
+    setEdges = _useEdgesState[1],
+    onEdgesChange = _useEdgesState[2];
   var onClickEdge = function onClickEdge(idNode, idEdge) {
     EdgeDataRef.current = {
       idNode: idNode,
@@ -686,11 +632,10 @@ var useFlow = function useFlow(_ref) {
     };
     openModal(true);
   };
-
   var buildFlowEdge = function buildFlowEdge(data) {
     var curDate = String(Math.random() * 100000);
     var source = data.source,
-        target = data.target;
+      target = data.target;
     return {
       id: curDate,
       type: 'FlowEdge',
@@ -703,7 +648,6 @@ var useFlow = function useFlow(_ref) {
       }
     };
   };
-
   var handleRemove = function handleRemove(id) {
     var nodeList = [];
     setNodes(function (nodes) {
@@ -729,12 +673,10 @@ var useFlow = function useFlow(_ref) {
       });
       return nodesRelocation(nodeList);
     });
-
     if (onRemove) {
       onRemove(exportNode(nodeList));
     }
   };
-
   var buildFlowNode = function buildFlowNode(data, payload) {
     var curDate = String(Math.random() * 100000);
     return {
@@ -753,13 +695,12 @@ var useFlow = function useFlow(_ref) {
       })
     };
   };
-
   var handleAdd = function handleAdd(defaultNode) {
     return function (payload) {
       var nodesCopy = [];
       var _EdgeDataRef$current = EdgeDataRef.current,
-          idNode = _EdgeDataRef$current.idNode,
-          idEdge = _EdgeDataRef$current.idEdge;
+        idNode = _EdgeDataRef$current.idNode,
+        idEdge = _EdgeDataRef$current.idEdge;
       var node = buildFlowNode(defaultNode, payload);
       setNodes(function (nodes) {
         setEdges(function (edges) {
@@ -786,15 +727,12 @@ var useFlow = function useFlow(_ref) {
         nodesCopy.splice(index, 0, node);
         return nodesRelocation(nodesCopy);
       });
-
       if (onAdd) {
         onAdd(exportNode(nodesCopy));
       }
-
       openModal(false);
     };
   };
-
   React.useEffect(function () {
     var res = defaultNodes.reduce(function (initial, data, key) {
       var beforeItem = initial.nodes[key - 1];
@@ -812,15 +750,13 @@ var useFlow = function useFlow(_ref) {
       nodes: [],
       edges: []
     });
-
     var _initialNodes$map = initialNodes.map(function (item) {
-      return _extends({}, item, {
-        draggable: draggable
-      });
-    }),
-        start = _initialNodes$map[0],
-        end = _initialNodes$map[1];
-
+        return _extends({}, item, {
+          draggable: draggable
+        });
+      }),
+      start = _initialNodes$map[0],
+      end = _initialNodes$map[1];
     var nodes = nodesRelocation([start].concat(res.nodes, [end]));
     var sourceIndex = nodes.length - 2;
     var endEdge = buildFlowEdge({
@@ -839,22 +775,20 @@ var useFlow = function useFlow(_ref) {
   };
 };
 
+// import './styles.less';
 var Flow = function Flow(props) {
   var containerRef = React.useRef(null);
   var tt = useTranslate(props.i18n);
-
   var _useState = React.useState(0),
-      horizontal = _useState[0],
-      setHorizontal = _useState[1];
-
+    horizontal = _useState[0],
+    setHorizontal = _useState[1];
   var _useState2 = React.useState(false),
-      isOpen = _useState2[0],
-      openModal = _useState2[1];
-
+    isOpen = _useState2[0],
+    openModal = _useState2[1];
   var defaultNodes = props.defaultNodes,
-      onRemove = props.onRemove,
-      draggable = props.draggable,
-      onAdd = props.onAdd;
+    onRemove = props.onRemove,
+    draggable = props.draggable,
+    onAdd = props.onAdd;
   var flowParams = {
     defaultNodes: defaultNodes,
     onRemove: onRemove,
@@ -863,16 +797,12 @@ var Flow = function Flow(props) {
     draggable: draggable
   };
   var flow = useFlow(flowParams);
-
   var handleCloseModal = function handleCloseModal() {
     return openModal(false);
   };
-
   React.useEffect(function () {
     var _containerRef$current;
-
     var width = (_containerRef$current = containerRef.current) == null ? void 0 : _containerRef$current.offsetWidth;
-
     if (width) {
       var x = width / 2 - 150;
       setHorizontal(x);
