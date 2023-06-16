@@ -43,10 +43,11 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   return target;
 }
 
-var _excluded = ["src"];
+var _excluded = ["src", "alt"];
 
 function Icon(_ref) {
   var src = _ref.src,
+      alt = _ref.alt,
       args = _objectWithoutPropertiesLoose(_ref, _excluded);
 
   var key = src;
@@ -60,7 +61,8 @@ function Icon(_ref) {
     style: _extends({
       padding: '5px'
     }, args),
-    src: src
+    src: src,
+    alt: alt
   });
 }
 
