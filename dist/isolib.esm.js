@@ -509,7 +509,7 @@ var NodeTypeModal = function NodeTypeModal(_ref) {
       icon = _ref.icon,
       label = _ref.label,
       i18n = _ref.i18n,
-      form = _ref.form,
+      modal = _ref.modal,
       onSubmit = _ref.onSubmit;
   var tt = useTranslate(i18n);
 
@@ -521,6 +521,14 @@ var NodeTypeModal = function NodeTypeModal(_ref) {
     return setIsOpen(false);
   };
 
+  var handleClick = function handleClick() {
+    if (modal) {
+      setIsOpen(true);
+    } else {
+      onSubmit({});
+    }
+  };
+
   var handleSubmit = function handleSubmit(payload) {
     onSubmit(payload);
     handleCloseModal();
@@ -529,19 +537,17 @@ var NodeTypeModal = function NodeTypeModal(_ref) {
   return React.createElement(React.Fragment, null, React.createElement(Button, {
     key: id,
     icon: icon,
-    onClick: function onClick() {
-      return setIsOpen(true);
-    },
+    onClick: handleClick,
     size: "bigger",
     className: "flow-modal-add-item"
-  }, label), React.createElement(Modal, {
+  }, label), !!modal && React.createElement(Modal, {
     title: tt('Add node'),
     open: isOpen,
     onCancel: handleCloseModal,
     footer: [React.createElement(Button, {
       onClick: handleCloseModal
     }, tt('Close'))]
-  }, form({
+  }, modal({
     onSubmit: handleSubmit
   })));
 };

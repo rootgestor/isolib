@@ -1,4 +1,4 @@
-type I18nProps = { [key: string]: any };
+type I18nProps = { [key: string]: string };
 
 export const useTranslate =
   (i18n?: I18nProps) =>

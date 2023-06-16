@@ -2,7 +2,17 @@ import React, { memo } from 'react';
 import { Position, Handle } from 'reactflow';
 import Icon from '../Icon';
 
-export const FlowNode = memo(({ data }: any) => {
+interface FlowNodeProps {
+  data: {
+    icon: string;
+    label: string;
+    static: boolean;
+    color?: string;
+    onRemove: () => void;
+  };
+}
+
+export const FlowNode = memo(({ data }: FlowNodeProps) => {
   const { icon, label, onRemove, color = '#6938fb' } = data;
   return (
     <>

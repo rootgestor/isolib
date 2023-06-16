@@ -1,2 +1,12 @@
 import React from 'react';
-export declare const FlowNode: React.MemoExoticComponent<({ data }: any) => JSX.Element>;
+interface FlowNodeProps {
+    data: {
+        icon: string;
+        label: string;
+        static: boolean;
+        color?: string;
+        onRemove: () => void;
+    };
+}
+export declare const FlowNode: React.MemoExoticComponent<({ data }: FlowNodeProps) => JSX.Element>;
+export {};

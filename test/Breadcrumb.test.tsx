@@ -1,13 +1,20 @@
 import React from 'react';
 import { Breadcrumb } from '../src/index';
+import type { BreadcrumbProps } from '../src/index';
 const ShallowRenderer = require('react-test-renderer/shallow');
 
-const args = {
-  onClick: (url: string) => alert(url),
-  breadcrumbNameMap: {
-    '/users': 'Usuarios',
-    '/user/1': 'Usuario > Detalle',
-  },
+const args: BreadcrumbProps = {
+  onClick: (url) => alert(url),
+  breadcrumbNameMap: [
+    {
+      label: 'Usuarios',
+      href: '/users',
+    },
+    {
+      label: 'Detalle',
+      href: '/user/1',
+    },
+  ],
 };
 
 describe('Breadcrumb', () => {
