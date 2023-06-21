@@ -5,7 +5,7 @@ export { FilterValue, SorterResult } from 'antd/lib/table/interface';
 export interface TableColumnProps<T>
   extends Omit<TableColumnType<T>, 'render'> {
   render?: (
-    value: string | number | boolean,
+    value: string | number | boolean | Object,
     record: T | TableRecord<T>
   ) => JSX.Element | string | number | boolean | T;
 }
