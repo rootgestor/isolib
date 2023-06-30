@@ -84,15 +84,14 @@ var Breadcrumb = function Breadcrumb(_ref) {
 var _excluded$1 = ["fetchOptions", "defaultOptions", "defaultValue", "onChange"];
 function SelectAsync(_ref) {
   var fetchOptions = _ref.fetchOptions,
-    defaultOptions = _ref.defaultOptions,
+    _ref$defaultOptions = _ref.defaultOptions,
+    defaultOptions = _ref$defaultOptions === void 0 ? [] : _ref$defaultOptions,
     defaultValue = _ref.defaultValue,
     onChange = _ref.onChange,
     props = _objectWithoutPropertiesLoose(_ref, _excluded$1);
-  var _useState = useState(function () {
-      return defaultValue;
-    }),
-    value = _useState[0],
-    setValue = _useState[1];
+  var _useState = useState(''),
+    selected = _useState[0],
+    setSelected = _useState[1];
   var _useState2 = useState(function () {
       return defaultOptions;
     }),
@@ -102,25 +101,27 @@ function SelectAsync(_ref) {
     loading = _useState3[0],
     setLoading = _useState3[1];
   var fetchRef = useRef(0);
+  var loadOptions = function loadOptions(val) {
+    fetchRef.current += 1;
+    var fetchId = fetchRef.current;
+    setLoading(true);
+    fetchOptions(val, selected).then(function (newOptions) {
+      if (fetchId !== fetchRef.current) return;
+      setLoading(false);
+      setOptions(newOptions);
+    });
+  };
   var debounceFetcher = useMemo(function () {
-    var loadOptions = function loadOptions(val) {
-      fetchRef.current += 1;
-      var fetchId = fetchRef.current;
-      setLoading(true);
-      fetchOptions(val).then(function (newOptions) {
-        if (fetchId !== fetchRef.current) {
-          return;
-        }
-        setLoading(false);
-        setOptions(newOptions);
-      });
-    };
-    return debounce(loadOptions, 800);
+    return debounce(loadOptions, 50);
   }, [fetchOptions]);
   var handleOnChange = function handleOnChange(val, option) {
-    setValue(val);
+    setSelected(val);
     if (onChange) onChange(val, option);
   };
+  useEffect(function () {
+    loadOptions('');
+    setSelected(defaultValue);
+  }, [defaultValue]);
   return React.createElement(Select, Object.assign({
     labelInValue: true,
     filterOption: false,
@@ -128,7 +129,7 @@ function SelectAsync(_ref) {
     onFocus: debounceFetcher
   }, props, {
     loading: loading,
-    value: value,
+    value: selected,
     onChange: handleOnChange,
     options: options
   }));
