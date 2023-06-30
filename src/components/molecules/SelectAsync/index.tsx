@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import Select from 'antd/lib/select';
 import debounce from 'lodash/debounce';
 
@@ -10,38 +10,38 @@ import {
 
 function SelectAsync({
   fetchOptions,
-  defaultOptions,
+  defaultOptions = [],
   defaultValue,
   onChange,
   ...props
 }: SelectAsyncProps) {
-  const [value, setValue] = useState(() => defaultValue);
+  const [selected, setSelected] = useState('');
   const [options, setOptions] = useState(() => defaultOptions);
-  const [loading, setLoading] = useState(false);
   const fetchRef = useRef(0);
 
+  const loadOptions = (val: SelectFetchOptionsType) => {
+    fetchRef.current += 1;
+    const fetchId = fetchRef.current;
+    fetchOptions(val, selected).then((newOptions: OptionType[]) => {
+      if (fetchId !== fetchRef.current) return;
+
+      setOptions(newOptions);
+    });
+  };
+
   const debounceFetcher = useMemo(() => {
-    const loadOptions = (val: SelectFetchOptionsType) => {
-      fetchRef.current += 1;
-      const fetchId = fetchRef.current;
-      setLoading(true);
-      fetchOptions(val).then((newOptions: OptionType[]) => {
-        if (fetchId !== fetchRef.current) {
-          return;
-        }
-
-        setLoading(false);
-        setOptions(newOptions);
-      });
-    };
-
-    return debounce(loadOptions, 800);
+    return debounce(loadOptions, 50);
   }, [fetchOptions]);
 
   const handleOnChange = (val: string, option: OptionType | OptionType[]) => {
-    setValue(val);
+    setSelected(val);
     if (onChange) onChange(val, option);
   };
+
+  useEffect(() => {
+    loadOptions('');
+    setSelected(defaultValue);
+  }, [defaultValue]);
 
   return (
     <Select
@@ -50,8 +50,7 @@ function SelectAsync({
       onSearch={debounceFetcher}
       onFocus={debounceFetcher}
       {...props}
-      loading={loading}
-      value={value}
+      value={selected}
       onChange={handleOnChange}
       options={options}
     />
